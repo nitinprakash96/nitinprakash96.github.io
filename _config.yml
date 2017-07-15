@@ -5,7 +5,6 @@ url: "www.thenitinprakash.com"
 
 
 
-
 # Secondary Parameters
 baseurl: "/mysite"
 header-img: img/home-bg.jpg
@@ -76,6 +75,8 @@ prose:
               value: "post"
             - name: "Slide"
               value: "slide"
+            - name: "Projector"
+              value: "projector"
             - name: "Notebook"
               value: "notebook"
       - name: "title"

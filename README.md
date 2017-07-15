@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Project Pages
 
 Project Pages is Jekyll Template specifically geared towards collaborative science. For more information, click [here](https://github.com/projectpages/project-pages/wiki/).
@@ -26,3 +27,7 @@ and clicking on the files, then clicking on the "thrash can / delete this file" 
 GitHub account -> Your Profile -> Repositories -> Project-Pages/Your Repo -> Plugin -> projector 
 
 and clicking on the files, then clicking on the "thrash can / delete this file" icon on the top right corner of the file.
+=======
+# mysite
+Personal website and blog
+>>>>>>> c60a0df6ff7ac038002bc01c0fd04001b272c6d8
