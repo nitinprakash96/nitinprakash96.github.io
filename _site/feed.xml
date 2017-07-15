@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nitin Prakash</title>
+    <description>Whatsup ya'll?</description>
+    <link>http://localhost:4000/mysite/</link>
+    <atom:link href="http://localhost:4000/mysite/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Sun, 16 Jul 2017 00:22:54 +0530</pubDate>
+    <lastBuildDate>Sun, 16 Jul 2017 00:22:54 +0530</lastBuildDate>
+    <generator>Jekyll v3.5.0</generator>
+    
+      <item>
+        <title>Hello World</title>
+        <description>
+
+Table of Contents
+
+
+  Table of Contents
+  Basic Functionality    
+      Headers
+    
+  
+  Header 1    
+      Header 2        
+          Header 3
+        
+      
+      Styling
+      Lists
+      Links
+      Images
+      Code
+      MathJax
+      Tables
+      Quotes
+      Rule
+      HTML
+    
+  
+  Advanced Functionality    
+      Color and Alignment
+    
+  
+
+
+Basic Functionality
+
+Headers
+
+Header 1
+
+Header 2
+
+Header 3
+
+Styling
+
+Bold
+
+Italics
+
+Bold and Italics
+
+Lists
+
+
+  
+    Item 1
+  
+  
+    Item 2
+  
+
+
+
+  
+    Unordered Item
+
+    
+      
+        Sub Item 1
+
+        
+          Bold Sub Sub Ordered Item
+        
+      
+    
+  
+
+
+Links
+
+In-Line
+
+I’m a reference-style link 1
+
+I’m a reference-style link 1
+
+Images
+
+Hold your pointer clicked over the image to expand the view.
+
+
+
+Code
+
+Inline code.
+
+import numpy as np
+def hello_world():
+    print('Hello World!'')
+
+MathJax
+
+Use MathJax for Math.
+
+
+Tables
+
+
+  
+    
+      Here
+      is
+      a
+      row!
+    
+  
+  
+    
+      is
+      Left
+      Center
+      Right
+    
+    
+      a
+      cut
+      it
+      A
+    
+    
+      column
+      short
+      B
+      C
+    
+  
+
+
+Quotes
+
+
+  War does not decide who is right, only who is left.
+
+
+Rule
+
+
+
+HTML
+
+Can write the whole post or sections in HTML for very specific needs. [For the advanced user or the code savvy.]
+
+Advanced Functionality
+
+Head over to the documentation page for tutorials on some basic html formatting and some extensions you can use for cool stuff like interactive 3D visualizations.
+
+Color and Alignment
+
+This text is centered.
+
+This is a red text with blue and green inline text.
+</description>
+        <pubDate>Tue, 19 Apr 2016 00:00:00 +0530</pubDate>
+        <link>http://localhost:4000/mysite/blog/2016/04/19/Hello-World/</link>
+        <guid isPermaLink="true">http://localhost:4000/mysite/blog/2016/04/19/Hello-World/</guid>
+        
+        <category>post</category>
+        
+        
+        <category>Blog</category>
+        
+      </item>
+    
+  </channel>
+</rss>
