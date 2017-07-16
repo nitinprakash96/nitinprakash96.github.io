@@ -6,10 +6,25 @@ url: "www.thenitinprakash.com"
 
 
 # Secondary Parameters
-baseurl: "/mysite"
+# Change url to your domain. Leave localhost server or blank when working locally.
+# or use the hint from http://jekyllrb.com/docs/github-pages/ to keep this the same
+# whether working locally or remotely. Start Jekyll with: jekyll serve --baseurl ''
+baseurl: "https://thenitinprakash.com"
 header-img: img/home-bg.jpg
 headercolor: "#FFFFFF"
-logo: ../img/logos/Project-Pages-New-Logo-Inverted.png
+
+# links
+links:
+  - title: Home
+    url: /
+    external: false
+    icon: home
+  - title: Blog
+    url: /blog
+  - title: About
+    url: /about
+  - title: Contact
+    url: /contact
 
 #Social media links
 twitter_username: Nitin63Nitin
@@ -39,26 +54,10 @@ defaults:
 # Prose Settings
 prose:
   ignore: ['feed.xml', '/stl', '/ply', '/js', '/plugin', '/lib', '/projectors', '_layouts', '/_includes', 'Gruntfile.js', 'package.json', 'proselinks.jsonp', 'ppanchor.matin', '.gitignore', '/search', '/css', '/img', 'favicon.png','_data/*.json','LICENSES.md','README.md','colorscheme.scss','members.html','mentions.html','index.html']
-  siteurl: ''
+  siteurl: 'www.thenitinprakash.com'
   ispp: true
   media: 'img'
   metadata:
-    projects:
-      - name: "title"
-        field:
-          element: "text"
-          label: "Title"
-          value: ""
-      - name: "description"
-        field:
-          element: "text"
-          label: "Description"
-          value: ""
-      - name: "category"
-        field:
-          element: "text"
-          label: "Project"
-          value: ""
     _posts:
       - name: "subtitle"
         field:
@@ -73,10 +72,6 @@ prose:
           options:
             - name: "Post"
               value: "post"
-            - name: "Slide"
-              value: "slide"
-            - name: "Projector"
-              value: "projector"
             - name: "Notebook"
               value: "notebook"
       - name: "title"
@@ -99,18 +94,12 @@ prose:
           element: "text"
           label: "Project"
           value: ""
-      - name: "horizontal"
-        field:
-          element: "hidden"
-          value: </section></section><section markdown="1" data-background="http://projectpages.github.io/project-pages/img/slidebackground.png"><section markdown="1">
+
       - name: "vertical"
         field:
           element: "hidden"
           value: </section><section markdown="1">
-      - name: "slideinit"
-        field:
-          element: "hidden"
-          value: <section markdown="1" data-background="http://projectpages.github.io/project-pages/img/slidebackground.png"><section markdown="1">
+
       - name: "theme"
         field:
           element: "select"
