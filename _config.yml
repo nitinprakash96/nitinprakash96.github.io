@@ -147,8 +147,3 @@ prose:
               value: "fade"
             - name: "None"
               value: "none"
-      - name: "visualworkflow"
-        field:
-          element: "checkbox"
-          label: "Visual Workflow Chart (Some Layouts)"
-          value: "true"
