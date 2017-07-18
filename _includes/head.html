@@ -4,29 +4,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ site.description }}">
-	{% include ogmeta.html %}
-
-	{% if site.altmetric == true %}
-
-	{% include altmetric.html %}
-
-	{% endif %}
-
-	<link rel='shortcut icon' type='image/png' href='{{ site.baseurl }}/favicon.png' />
+	  <link rel='shortcut icon' type='image/png' href='{{ site.url }}/favicon.png' />
 
     <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="{{ "/css/bootstrap.min.css" | prepend: site.baseurl | prepend: site.url }}">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ "/css/clean-blog.css" | prepend: site.baseurl | prepend: site.url }}">
+    <link rel="stylesheet" href="/assets/css/clean-blog.css">
 
 	<!-- Adjust Colors -->
-    <link rel="stylesheet" href="{{ "/colorscheme.css" | prepend: site.baseurl | prepend: site.url }}">
+    <link rel="stylesheet" href="/assets/css/colorscheme.css">
 
     <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="{{ "/css/syntax.css" | prepend: site.baseurl | prepend: site.url }}">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
 
     <!-- Custom Fonts -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -61,8 +53,6 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 	<!-- Custom Theme JavaScript -->
-	<script src="{{ "/js/clean-blog.min.js " | prepend: site.baseurl | prepend: site.url }}"></script>
-
-	{% include analytics.html %}
+	<script src="/assets/js/clean-blog.min.js "></script>
 
 </head>
