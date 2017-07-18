@@ -1,7 +1,6 @@
 # Site settings
 title: Nitin Prakash
 description: "Whatsup ya'll?"
-url: "www.thenitinprakash.com"
 
 
 
@@ -9,8 +8,7 @@ url: "www.thenitinprakash.com"
 # Change url to your domain. Leave localhost server or blank when working locally.
 # or use the hint from http://jekyllrb.com/docs/github-pages/ to keep this the same
 # whether working locally or remotely. Start Jekyll with: jekyll serve --baseurl ''
-baseurl: "https://thenitinprakash.com"
-header-img: img/home-bg.jpg
+url: "www.thenitinprakash.com"
 headercolor: "#FFFFFF"
 
 # links
@@ -19,8 +17,6 @@ links:
     url: /
     external: false
     icon: home
-  - title: Blog
-    url: /blog
   - title: About
     url: /about
   - title: Contact
@@ -49,12 +45,13 @@ defaults:
       type: "pages"
     values:
       layout: "project"
-      header-img: "img/home-bg.jpg"
+      header-img: "/img/home-bg.jpg"
 
 # Prose Settings
 prose:
   ignore: ['feed.xml', '/stl', '/ply', '/js', '/plugin', '/lib', '/projectors', '_layouts', '/_includes', 'Gruntfile.js', 'package.json', 'proselinks.jsonp', 'ppanchor.matin', '.gitignore', '/search', '/css', '/img', 'favicon.png','_data/*.json','LICENSES.md','README.md','colorscheme.scss','members.html','mentions.html','index.html']
   siteurl: 'www.thenitinprakash.com'
+  relativeLinks: 'http://thenitinprakash.com/proselinks.jsonp'
   ispp: true
   media: 'img'
   metadata:
