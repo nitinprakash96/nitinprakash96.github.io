@@ -1,6 +1,11 @@
 # Site settings
 title: Nitin Prakash
-description: "Whatsup ya'll?"
+description: "Just another developer!"
+
+#owner
+owner:
+  name: Nitin Prakash
+  email: prakash.nitin63@gmail.com
 
 
 
