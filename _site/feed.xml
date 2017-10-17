@@ -2,180 +2,76 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Nitin Prakash</title>
-    <description>Whatsup ya'll?</description>
-    <link>http://localhost:4000/mysite/</link>
-    <atom:link href="http://localhost:4000/mysite/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 16 Jul 2017 00:41:20 +0530</pubDate>
-    <lastBuildDate>Sun, 16 Jul 2017 00:41:20 +0530</lastBuildDate>
+    <description>Just another developer!</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Tue, 17 Oct 2017 05:23:12 +0530</pubDate>
+    <lastBuildDate>Tue, 17 Oct 2017 05:23:12 +0530</lastBuildDate>
     <generator>Jekyll v3.5.0</generator>
     
       <item>
-        <title>Hello World</title>
+        <title>Why I chose Jekyll over Hugo and WordPress</title>
         <description>
 
-Table of Contents
+What is Jekyll, Hugo and WordPress?
+
+What is Jekyll?
+
+Jekyll is basically a static-site generator written in Ruby and distributed under open source license. It happens to be the engine behind Github pages which allows hosting a blog or a website on Github servers for free.
+
+The great thing about jekyll is that it supports markdown format. It takes in a template and runs it through a Markdown converter and renders it outputting a static HTML page.
 
 
-  Table of Contents
-  Basic Functionality    
-      Headers
-    
-  
-  Header 1    
-      Header 2        
-          Header 3
-        
-      
-      Styling
-      Lists
-      Links
-      Images
-      Code
-      MathJax
-      Tables
-      Quotes
-      Rule
-      HTML
-    
-  
-  Advanced Functionality    
-      Color and Alignment
-    
-  
+What is Hugo?
+
+Hugo is a general-purpose website framework. Technically speaking, Hugo is a static site generator. Unlike systems that dynamically build a page with each visitor request, Hugo builds pages when you create or update your content.
+
+And similar to Jekyll, Hugo sites run without the need for a database or dependencies on expensive runtimes like Ruby, Python, or PHP.
+
+While Jekyll comes with a default theme template as shown above, Hugo doesn’t.
+
+What is WordPress?
+
+WordPress is the most popular blogging platform over the Internet. Perhaps about 24% of the website on the web run on WordPress engine and is used by giants like TIMES, Forbes etc.
+
+WordPress started as just a blogging system, but has evolved to be used as full content management system.
 
 
-Basic Functionality
 
-Headers
+That’s great but Why Jekyll?
 
-Header 1
+Now comes the big question, Why Jekyll?
 
-Header 2
+Like most people I spent days deciding which blogging platform would be “better” for one of my own. And most of the people end up using WordPress. Mostly because of it’s popularity or they’ve heard of it.
 
-Header 3
-
-Styling
-
-Bold
-
-Italics
-
-Bold and Italics
-
-Lists
+However, I preferred to go with Jekyll. I’m not sure if it’s right to go with Jekyll over Hugo or WordPress but after looking at the features I needed, it was the way to go.
 
 
   
-    Item 1
+    Flexibility:
+Jekyll offers a lot of flexibility. I have complete control over the looks of every single page in my blog. Now, anyone could argue that it’s possible with WordPress too. But, with Jekyll, it’s far, far easier, and less time-consuming.
   
   
-    Item 2
-  
-
-
-
-  
-    Unordered Item
-
-    
-      
-        Sub Item 1
-
-        
-          Bold Sub Sub Ordered Item
-        
-      
-    
-  
-
-
-Links
-
-In-Line
-
-I’m a reference-style link 1
-
-I’m a reference-style link 1
-
-Images
-
-Hold your pointer clicked over the image to expand the view.
-
-
-
-Code
-
-Inline code.
-
-import numpy as np
-def hello_world():
-    print('Hello World!'')
-
-MathJax
-
-Use MathJax for Math.
-
-
-Tables
-
-
-  
-    
-      Here
-      is
-      a
-      row!
-    
+    Easy Setup:
+It takes less than 5 minutes to install Jekyll on your local computer. Just a couple of commands, literally, and you’re good to go.Even Hugo is easy to install as it comes in a single binary package. But WordPress takes a little more than a couple of commands to setup.
   
   
-    
-      is
-      Left
-      Center
-      Right
-    
-    
-      a
-      cut
-      it
-      A
-    
-    
-      column
-      short
-      B
-      C
-    
+    CLI is Love:
+I like to work on command line. Jekyll and Hugo provides a handful of commands to work with.
+  
+  
+    Plugins:
+WordPress has grown to a big community of users and developers. It comes with a lot of plugins and themes. Jekyll is very scarce when the talk is about themes and plugins. But all that I required was a commenting section which was possible using Disqus.
+  
+  
+    Extensibility:
+Because of this plugin architecture, it’s relatively easy to add functionality to Jekyll-generated site with short snippets of code. However, Hugo does not currently have a plugin API at all, so adding that kind of functionality is a bit difficult.
   
 
-
-Quotes
-
-
-  War does not decide who is right, only who is left.
-
-
-Rule
-
-
-
-HTML
-
-Can write the whole post or sections in HTML for very specific needs. [For the advanced user or the code savvy.]
-
-Advanced Functionality
-
-Head over to the documentation page for tutorials on some basic html formatting and some extensions you can use for cool stuff like interactive 3D visualizations.
-
-Color and Alignment
-
-This text is centered.
-
-This is a red text with blue and green inline text.
 </description>
-        <pubDate>Tue, 19 Apr 2016 00:00:00 +0530</pubDate>
-        <link>http://localhost:4000/mysite/blog/2016/04/19/Hello-World/</link>
-        <guid isPermaLink="true">http://localhost:4000/mysite/blog/2016/04/19/Hello-World/</guid>
+        <pubDate>Wed, 19 Jul 2017 00:00:00 +0530</pubDate>
+        <link>http://localhost:4000/blog/2017/07/19/Why-I-Chose-Jekyll/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2017/07/19/Why-I-Chose-Jekyll/</guid>
         
         <category>post</category>
         
