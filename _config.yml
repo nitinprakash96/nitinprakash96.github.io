@@ -4,7 +4,7 @@ email:       prakash.nitin63@gmail.com
 author:      Nitin Prakash
 description: "A place where I store my thoughts"
 baseurl:     ""
-url:         "www.thenitinprakash.com"
+url:         "http://www.thenitinprakash.com"
 date_format: "%b %-d, %Y"
 header_pages:
  - about.md
