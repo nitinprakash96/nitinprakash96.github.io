@@ -1,10 +1,17 @@
 <footer class="center">
-  <div class="measure">
-    <small>
-      Built with &hearts; <span>Jekyll</span>.<br>
-    </small>
-  </div>
+	<div class="center">
+		{% if site.show_social_icons %}
+    		{% include social_links.html %}
+  		{% endif %}
+	</div>
+
+ 	<div class="measure">
+    	<small>
+      		Built with &hearts; <span>Jekyll</span>.<br>
+    	</small>
+  	</div>
 </footer>
+
 {% if site.enable_anchorjs %}<!-- AnchorJS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.0.0/anchor.min.js"></script>
 <script>
