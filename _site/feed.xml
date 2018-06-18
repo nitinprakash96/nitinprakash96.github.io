@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Nitin Prakash</title>
-    <description>Personal blog</description>
-    <link>www.thenitinprakash.com/</link>
-    <atom:link href="www.thenitinprakash.com/feed.xml" rel="self" type="application/rss+xml" />
+    <description>A place where I store my thoughts</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
         <title>Why I chose Jekyll over Hugo and WordPress</title>
@@ -67,8 +67,8 @@ Because of this plugin architecture, it’s relatively easy to add functionality
 &lt;/ul&gt;
 </description>
         <pubDate>Wed, 19 Jul 2017 00:00:00 +0530</pubDate>
-        <link>www.thenitinprakash.com/blog/2017/07/19/Why-I-Chose-Jekyll/</link>
-        <guid isPermaLink="true">www.thenitinprakash.com/blog/2017/07/19/Why-I-Chose-Jekyll/</guid>
+        <link>http://localhost:4000/blog/2017/07/19/Why-I-Chose-Jekyll/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2017/07/19/Why-I-Chose-Jekyll/</guid>
       </item>
     
   </channel>
