@@ -1,8 +1,0 @@
-callback([
-
-  {
-    "text": "Why I chose Jekyll over Hugo and WordPress",
-    "href": "http://localhost:4000/blog/2017/07/19/Why-I-Chose-Jekyll/"
-  } 
-
-])

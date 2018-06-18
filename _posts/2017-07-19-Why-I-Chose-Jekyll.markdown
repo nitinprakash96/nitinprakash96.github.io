@@ -2,13 +2,12 @@
 layout:     post
 title:      Why I chose Jekyll over Hugo and WordPress
 author:     Nitin Prakash
-tags: 		  post
-subtitle:   Entering the world of blogging
+summary:   Entering the world of blogging
 category:   Blog
 ---
 <!-- Start Writing Below in Markdown -->
 
-## What is Jekyll, Hugo and WordPress?
+### What is Jekyll, Hugo and WordPress?
 
 
 
@@ -18,7 +17,7 @@ Jekyll is basically a static-site generator written in Ruby and distributed unde
 
 The great thing about jekyll is that it supports markdown format. It takes in a template and runs it through a [Markdown](https://en.wikipedia.org/wiki/Markdown) converter and renders it outputting a static HTML page.
 
-![Jekyll-default-theme](/assets/img/first-post/def.png)
+![Jekyll-default-theme](/images//def.png)
 **What is Hugo?**
 
 [Hugo](https://gohugo.io/) is a general-purpose website framework. Technically speaking, Hugo is a [static site generator](https://davidwalsh.name/introduction-static-site-generators). Unlike systems that dynamically build a page with each visitor request, Hugo builds pages when you create or update your content.
@@ -33,7 +32,7 @@ WordPress is the most popular blogging platform over the Internet. Perhaps about
 
 WordPress started as just a blogging system, but has evolved to be used as full content management system.
 
-![WordPress-default-theme](/assets/img/first-post/wp.png)
+![WordPress-default-theme](/images/wp.png)
 
 
 

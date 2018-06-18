@@ -1,10 +1,13 @@
 ---
 layout: page
-title: "About Me"
+title: About Me
+permalink: /about/
+tags: about
 ---
 
+![Jedi](/images/me.JPG)
+
 <div class="row">
-  <img src="/assets/img/me.jpg" alt="Display Picture" align="left" />
   <br>
   <br>
   <br>
