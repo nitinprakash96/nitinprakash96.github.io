@@ -4,7 +4,7 @@ email:       prakash.nitin63@gmail.com
 author:      Nitin Prakash
 description: "A place where I store my thoughts"
 baseurl:     ""
-url:         "http://www.thenitinprakash.com"
+url:         "http://thenitinprakash.com"
 date_format: "%b %-d, %Y"
 header_pages:
  - about.md
@@ -15,7 +15,7 @@ google_analytics: "UA-120923664-1"
 
 # Disqus post comments
 # (leave blank to disable Disqus)
-disqus_shortname:
+disqus_shortname: nitinprakash96
 
 
 # Social icons
@@ -30,6 +30,8 @@ share_twitter: true
 share_linkedin: false
 share_reddit: false
 share_hackernews: true
+
+enable_mathjax: true
 
 text:
   pagination:
