@@ -73,7 +73,7 @@ A skilled player plays so as never to lose. If not, then what's the point? Let u
 
 This seems not much of a complicated problem but for once, what if we applied approaches other than RL?
 
-- Let's say we apply ***minimax*** method from _game theory_. It would be difficult to apply that in this case because it assumes a particular way of playing by the opponent. minimax player would never reach a game state from which it could lose. In fact it will always win from that state because of incorrect play by the opponent.
+- Let's say we apply ***minimax*** method from _game theory_. It would be difficult to apply that in this case because it assumes a particular way of playing by the opponent. Minimax player would never reach a game state from which it could lose. In fact it will always win from that state because of incorrect play by the opponent.
 
 <p align="center">
   <img src="/images/3_post/tt-lost.jpg" style="width:500px;height:400px;">
@@ -93,7 +93,7 @@ Even though the first point is totally out of the picture now, we'll see that th
 
 - We will follow a ___greedy___ approach now. What I mean to say is that we will select the moves that will lead us to a higher value state or we can say the state with higher probability of winning.
 
-- Sometimes we make a ___exploratory___ random movebecause they cause us to experience states that we might otherwise never see.
+- Sometimes we make a ___exploratory___ random move because they cause us to experience states that we might otherwise never see.
 
 <p align="center">
   <img src="/images/3_post/tictacttoe.png">
