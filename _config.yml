@@ -7,6 +7,7 @@ baseurl:     ""
 url:         "http://thenitinprakash.com"
 date_format: "%b %-d, %Y"
 header_pages:
+ - notes.md
  - about.md
 
  # Google analytics
@@ -15,7 +16,7 @@ google_analytics: "UA-120923664-1"
 
 # Disqus post comments
 # (leave blank to disable Disqus)
-disqus_shortname: nitinprakash96
+disqus_shortname:
 
 
 # Social icons
@@ -24,14 +25,18 @@ twitter_username: nitinprakash96
 paypal_url: nitinprakash96
 
 # Post sharing icons
-show_social_icons: true
+show_social_icons:    true
 # Change to 'true' to enable individual icons
-share_twitter: true
-share_linkedin: false
-share_reddit: false
-share_hackernews: true
+share_twitter:        true
+share_linkedin:       false
+share_reddit:         false
+share_hackernews:     true
 
-enable_mathjax: true
+# Optional features
+animated:             true
+show_related_posts:   true
+extended_fonts:       false
+enable_mathjax:       true
 
 text:
   pagination:
