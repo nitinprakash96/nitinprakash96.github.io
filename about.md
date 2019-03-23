@@ -9,11 +9,11 @@ tags: about
 
  Hi, I'm Nitin Prakash. I live in Jaipur, India. I started out as science person having interest in Chemistry but would eventually go on to pursue Computer Science and Engineering. I wrote my very first code in Visual Basic as a school course subject. But later on(10 years later duh!) I switched to C. I am now quite comfortable with Python, C++ and Go.
 
- My life(more or less) in bullet points:
- - I read one academic paper a week.
- - I workout 6 days a week. I can deadlift 200 and squat 150 kgs.
- - I like riding motorbikes.
- - I code for at least 4 hours a day.
+ Some things I am fond of:
+ - Dogs over cats any day.
+ - I workout 6 days a week. Would prefer lifting a car over having abs.
+ - I like riding motorbikes. Kawasaki ZX-10R is amazing.
+ - Love to listen Linkin Park, Breaking Benjamin and Eminem. 
 
  And also, I like Star Wars.
 
