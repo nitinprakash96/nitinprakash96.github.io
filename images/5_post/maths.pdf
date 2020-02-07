@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<!--
+Copyright 2012 Mozilla Foundation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+Adobe CMap resources are covered by their own copyright but the same license:
+
+    Copyright 1990-2015 Adobe Systems Incorporated.
+
+See https://github.com/adobe-type-tools/cmap-resources
+-->
+<!--html dir="ltr" type="text/cache-manifest" manifest="/pdfjsoffline/web/offline.appcache" mozdisallowselectionprint moznomarginboxes-->
+<html dir="ltr" mozdisallowselectionprint="" moznomarginboxes=""><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="google" content="notranslate">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>cbse-class-10-mathematics-sample-paper-2019.pdf</title>
+
+    <link rel="stylesheet" href="maths_files/viewer.css">
+	<!--link rel="stylesheet" href="freepdf.css"-->
+    <script src="maths_files/compatibility.js"></script>
+
+	<!-- This snippet is used in production (included from viewer.html) -->
+	<link rel="resource" type="application/l10n" href="https://testchampion.jagranjosh.com/ebookreader/web/locale/locale.properties">
+	<script src="maths_files/l10n.js"></script>
+	<script src="maths_files/pdf.js"></script>
+
+    <script src="maths_files/debugger.js"></script>
+    <script src="maths_files/viewer.js"></script>
+	
+	<script src="maths_files/jquery-2.js"></script>
+	<!--script src="addcomment.js"></script>
+	<script src="addcache.js"></script>
+	<script src="countPlugin.js"></script-->
+
+  </head>
+  <!--body tabindex="1" class="loadingInProgress" oncontextmenu="return false;" -->
+  <body tabindex="1" class="">
+    <div id="outerContainer">
+
+      <div id="sidebarContainer">
+        <div id="toolbarSidebar">
+          <div class="splitToolbarButton toggled">
+            <button id="viewThumbnail" class="toolbarButton group toggled" title="Show Thumbnails" tabindex="2" data-l10n-id="thumbs">
+               <span data-l10n-id="thumbs_label">Thumbnails</span>
+            </button>
+            <button id="viewOutline" class="toolbarButton group" title="Show Document Outline" tabindex="3" data-l10n-id="outline" disabled="disabled">
+               <span data-l10n-id="outline_label">Document Outline</span>
+            </button>
+            <button id="viewAttachments" class="toolbarButton group" title="Show Attachments" tabindex="4" data-l10n-id="attachments" style="display: none;" disabled="disabled">
+               <span data-l10n-id="attachments_label">Attachments</span>
+            </button>
+			<button id="viewNotetext" class="toolbarButton group" title="Show Note" tabindex="5" style="display: none;">
+				<span>Note</span>
+			</button>
+          </div>
+        </div>
+        <div id="sidebarContent">
+          <div id="thumbnailView"><a href="#page=1" title="Page 1"><div id="thumbnailContainer1" class="thumbnail selected"><div class="thumbnailSelectionRing" style="width: 100px; height: 140px;"></div></div></a><a href="#page=2" title="Page 2"><div id="thumbnailContainer2" class="thumbnail"><div class="thumbnailSelectionRing" style="width: 100px; height: 140px;"></div></div></a><a href="#page=3" title="Page 3"><div id="thumbnailContainer3" class="thumbnail"><div class="thumbnailSelectionRing" style="width: 100px; height: 140px;"></div></div></a><a href="#page=4" title="Page 4"><div id="thumbnailContainer4" class="thumbnail"><div class="thumbnailSelectionRing" style="width: 100px; height: 140px;"></div></div></a><a href="#page=5" title="Page 5"><div id="thumbnailContainer5" class="thumbnail"><div class="thumbnailSelectionRing" style="width: 100px; height: 140px;"></div></div></a></div>
+          <div id="outlineView" class="hidden"></div>
+          <div id="attachmentsView" class="hidden"></div>
+		  <!--<div id="noteView" class="hidden"></div>-->
+        </div>
+      </div>  <!-- sidebarContainer -->
+
+      <div id="mainContainer">
+        <div class="findbar hidden doorHanger hiddenSmallView" id="findbar">
+          <label for="findInput" class="toolbarLabel" data-l10n-id="find_label">Find:</label>
+          <input id="findInput" class="toolbarField" tabindex="91">
+          <div class="splitToolbarButton">
+            <button class="toolbarButton findPrevious" title="Find the previous occurrence of the phrase" id="findPrevious" tabindex="92" data-l10n-id="find_previous">
+              <span data-l10n-id="find_previous_label">Previous</span>
+            </button>
+            <div class="splitToolbarButtonSeparator"></div>
+            <button class="toolbarButton findNext" title="Find the next occurrence of the phrase" id="findNext" tabindex="93" data-l10n-id="find_next">
+              <span data-l10n-id="find_next_label">Next</span>
+            </button>
+          </div>
+          <input type="checkbox" id="findHighlightAll" class="toolbarField" tabindex="94">
+          <label for="findHighlightAll" class="toolbarLabel" data-l10n-id="find_highlight">Highlight all</label>
+          <input type="checkbox" id="findMatchCase" class="toolbarField" tabindex="95">
+          <label for="findMatchCase" class="toolbarLabel" data-l10n-id="find_match_case_label">Match case</label>
+          <span id="findResultsCount" class="toolbarLabel hidden"></span>
+          <span id="findMsg" class="toolbarLabel"></span>
+        </div>  <!-- findbar -->
+
+        <div id="secondaryToolbar" class="secondaryToolbar hidden doorHangerRight">
+          <div id="secondaryToolbarButtonContainer" style="max-height: 860px;">
+            <button id="secondaryPresentationMode" class="secondaryToolbarButton presentationMode visibleLargeView" title="Switch to Presentation Mode" tabindex="51" data-l10n-id="presentation_mode">
+              <span data-l10n-id="presentation_mode_label">Presentation Mode</span>
+            </button>
+
+            <button id="secondaryOpenFile" class="secondaryToolbarButton openFile visibleLargeView" title="Open File" tabindex="52" data-l10n-id="open_file">
+              <span data-l10n-id="open_file_label">Open</span>
+            </button>
+
+            <button id="secondaryPrint" class="secondaryToolbarButton print visibleMediumView" title="Print" tabindex="53" data-l10n-id="print" style="display: none;">
+              <span data-l10n-id="print_label">Print</span>
+            </button>
+
+            <button id="secondaryDownload" class="secondaryToolbarButton download visibleMediumView" title="Download" tabindex="54" data-l10n-id="download" style="display: none;">
+              <span data-l10n-id="download_label">Download</span>
+            </button>
+
+            <a href="#page=1&amp;zoom=auto,-276,848" id="secondaryViewBookmark" class="secondaryToolbarButton bookmark visibleSmallView" title="Current view (copy or open in new window)" tabindex="55" data-l10n-id="bookmark" style="display: none;">
+              <span data-l10n-id="bookmark_label">Current View</span>
+            </a>
+
+            <div class="horizontalToolbarSeparator visibleLargeView"></div>
+
+            <button id="firstPage" class="secondaryToolbarButton firstPage" title="Go to First Page" tabindex="56" data-l10n-id="first_page" disabled="disabled">
+              <span data-l10n-id="first_page_label">Go to First Page</span>
+            </button>
+            <button id="lastPage" class="secondaryToolbarButton lastPage" title="Go to Last Page" tabindex="57" data-l10n-id="last_page">
+              <span data-l10n-id="last_page_label">Go to Last Page</span>
+            </button>
+
+            <div class="horizontalToolbarSeparator"></div>
+
+            <button id="pageRotateCw" class="secondaryToolbarButton rotateCw" title="Rotate Clockwise" tabindex="58" data-l10n-id="page_rotate_cw">
+              <span data-l10n-id="page_rotate_cw_label">Rotate Clockwise</span>
+            </button>
+            <button id="pageRotateCcw" class="secondaryToolbarButton rotateCcw" title="Rotate Counterclockwise" tabindex="59" data-l10n-id="page_rotate_ccw">
+              <span data-l10n-id="page_rotate_ccw_label">Rotate Counterclockwise</span>
+            </button>
+
+            <div class="horizontalToolbarSeparator"></div>
+
+            <button id="toggleHandTool" class="secondaryToolbarButton handTool" title="Enable hand tool" tabindex="60" data-l10n-id="hand_tool_enable">
+              <span data-l10n-id="hand_tool_enable_label">Enable hand tool</span>
+            </button>
+
+            <div class="horizontalToolbarSeparator"></div>
+
+            <button id="documentProperties" class="secondaryToolbarButton documentProperties" title="Document Properties…" tabindex="61" data-l10n-id="document_properties" style="display: none;">
+              <span data-l10n-id="document_properties_label">Document Properties…</span>
+            </button>
+          </div>
+        </div>  <!-- secondaryToolbar -->
+
+        <div class="toolbar">
+          <div id="toolbarContainer">
+            <div id="toolbarViewer">
+              <div id="toolbarViewerLeft">
+                <button id="sidebarToggle" class="toolbarButton" title="Toggle Sidebar" tabindex="11" data-l10n-id="toggle_sidebar">
+                  <span data-l10n-id="toggle_sidebar_label">Toggle Sidebar</span>
+                </button>
+                <div class="toolbarButtonSpacer"></div>
+                <button id="viewFind" class="toolbarButton group hiddenSmallView" title="Find in Document" tabindex="12" data-l10n-id="findbar">
+                   <span data-l10n-id="findbar_label">Find</span>
+                </button>
+                <div class="splitToolbarButton">
+                  <button class="toolbarButton pageUp" title="Previous Page" id="previous" tabindex="13" data-l10n-id="previous" disabled="disabled">
+                    <span data-l10n-id="previous_label">Previous</span>
+                  </button>
+                  <div class="splitToolbarButtonSeparator"></div>
+                  <button class="toolbarButton pageDown" title="Next Page" id="next" tabindex="14" data-l10n-id="next">
+                    <span data-l10n-id="next_label">Next</span>
+                  </button>
+                </div>
+                <label id="pageNumberLabel" class="toolbarLabel" for="pageNumber" data-l10n-id="page_label">Page:</label>
+                <input type="number" id="pageNumber" class="toolbarField pageNumber" value="1" size="4" min="1" tabindex="15" max="5">
+                <span id="numPages" class="toolbarLabel">of 5</span>
+              </div>
+              <div id="toolbarViewerRight">
+				<!--<button id="bookmarkme" class="bookmarkme" title="Bookmark to access offline" >
+					<span >Bookmark to access offline </span>
+				</button>-->
+                <button id="presentationMode" class="toolbarButton presentationMode hiddenLargeView" title="Switch to Presentation Mode" tabindex="31" data-l10n-id="presentation_mode">
+                  <span data-l10n-id="presentation_mode_label">Presentation Mode</span>
+                </button>
+
+                <button id="openFile" class="toolbarButton openFile hiddenLargeView" title="Open File" tabindex="32" data-l10n-id="open_file" style="display: none;">
+                  <span data-l10n-id="open_file_label">Open</span>
+                </button>
+
+                <button id="print" class="toolbarButton print hiddenMediumView" title="Print" tabindex="33" data-l10n-id="print" style="display: none;">
+                  <span data-l10n-id="print_label">Print</span>
+                </button>
+
+                <button id="download" class="toolbarButton download hiddenMediumView" title="Download" tabindex="34" data-l10n-id="download" style="display: none;">
+                  <span data-l10n-id="download_label">Download</span>
+                </button>
+                <a href="#page=1&amp;zoom=auto,-276,848" id="viewBookmark" class="toolbarButton bookmark hiddenSmallView" title="Current view (copy or open in new window)" tabindex="35" data-l10n-id="bookmark" style="display: none;">
+                  <span data-l10n-id="bookmark_label">Current View</span>
+                </a>
+
+                <div class="verticalToolbarSeparator hiddenSmallView" style="display: none;"></div>
+
+                <button id="secondaryToolbarToggle" class="toolbarButton" title="Tools" tabindex="36" data-l10n-id="tools" style="display: none;">
+                  <span data-l10n-id="tools_label">Tools</span>
+                </button>
+              </div>
+              <div class="outerCenter">
+                <div class="innerCenter" id="toolbarViewerMiddle">
+                  <div class="splitToolbarButton">
+                    <button id="zoomOut" class="toolbarButton zoomOut" title="Zoom Out" tabindex="21" data-l10n-id="zoom_out">
+                      <span data-l10n-id="zoom_out_label">Zoom Out</span>
+                    </button>
+                    <div class="splitToolbarButtonSeparator"></div>
+                    <button id="zoomIn" class="toolbarButton zoomIn" title="Zoom In" tabindex="22" data-l10n-id="zoom_in">
+                      <span data-l10n-id="zoom_in_label">Zoom In</span>
+                     </button>
+                  </div>
+                  <span id="scaleSelectContainer" class="dropdownToolbarButton" style="min-width: 123px; max-width: 123px;">
+                     <select id="scaleSelect" title="Zoom" tabindex="23" data-l10n-id="zoom" style="min-width: 145px;">
+                      <option id="pageAutoOption" title="" value="auto" selected="selected" data-l10n-id="page_scale_auto">Automatic Zoom</option>
+                      <option id="pageActualOption" title="" value="page-actual" data-l10n-id="page_scale_actual">Actual Size</option>
+                      <option id="pageFitOption" title="" value="page-fit" data-l10n-id="page_scale_fit">Page Fit</option>
+                      <option id="pageWidthOption" title="" value="page-width" data-l10n-id="page_scale_width">Page Width</option>
+                      <option id="customScaleOption" title="" value="custom"></option>
+                      <option title="" value="0.5" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 50 }">50%</option>
+                      <option title="" value="0.75" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 75 }">75%</option>
+                      <option title="" value="1" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 100 }">100%</option>
+                      <option title="" value="1.25" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 125 }">125%</option>
+                      <option title="" value="1.5" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 150 }">150%</option>
+                      <option title="" value="2" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 200 }">200%</option>
+                      <option title="" value="3" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 300 }">300%</option>
+                      <option title="" value="4" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 400 }">400%</option>
+                    </select>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div id="loadingBar" class="hidden" style="width: calc(100% - 9px);">
+              <div class="progress indeterminate" style="height: 100%; width: 100%;">
+                <div class="glimmer">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <menu type="context" id="viewerContextMenu">
+          <menuitem id="contextFirstPage" label="Go to First Page" data-l10n-id="first_page" title="Go to First Page"></menuitem>
+          <menuitem id="contextLastPage" label="Go to Last Page" data-l10n-id="last_page" title="Go to Last Page"></menuitem>
+          <menuitem id="contextPageRotateCw" label="Rotate Clockwise" data-l10n-id="page_rotate_cw" title="Rotate Clockwise"></menuitem>
+          <menuitem id="contextPageRotateCcw" label="Rotate Counterclockwise" data-l10n-id="page_rotate_ccw" title="Rotate Counterclockwise"></menuitem>
+        </menu>
+
+        <div id="viewerContainer" tabindex="0">
+			<div id="loaderviewer" style="position:fixed; top:50%; left:50%; display:none; z-index: 999;"><img src="maths_files/loader.gif"></div>
+          <div id="viewer" class="pdfViewer"><div id="pageContainer1" class="page" style="width: 991px; height: 1403px;" data-page-number="1" data-loaded="true"><div style="width: 991px; height: 1403px;" class="canvasWrapper"><canvas id="page1" moz-opaque="" width="992" height="1404" style="width: 992px; height: 1404px;"></canvas></div><div class="textLayer" style="width: 991px; height: 1403px;"><div style="left: 485.6px; top: 1303.13px; font-size: 18.3998px; font-family: sans-serif;">1</div><div style="left: 456.4px; top: 80.5933px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.901209);" data-canvas-width="64.88701999999999">Class X</div><div style="left: 434.8px; top: 106.994px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.870451);" data-canvas-width="111.417712">Mathematics</div><div style="left: 352.4px; top: 129.793px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.845382);" data-canvas-width="246.09077199999996">Sample Question Paper 2018</div><div style="left: 598.4px; top: 129.793px; font-size: 20px; font-family: sans-serif;">-</div><div style="left: 605.2px; top: 129.793px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.769077);" data-canvas-width="19.996">19</div><div style="left: 67.6px; top: 162.194px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.873756);" data-canvas-width="114.79703600000002">Time allowed</div><div style="left: 182.4px; top: 162.194px; font-size: 20px; font-family: sans-serif;">:</div><div style="left: 194.4px; top: 162.194px; font-size: 20px; font-family: sans-serif;">3</div><div style="left: 209.6px; top: 162.194px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.91361);" data-canvas-width="52.9894">Hours</div><div style="left: 782.8px; top: 162.194px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.94124);" data-canvas-width="105.41891200000002">Max. Marks</div><div style="left: 888px; top: 162.194px; font-size: 20px; font-family: sans-serif;">:</div><div style="left: 900px; top: 162.194px; font-size: 20px; font-family: sans-serif;">8</div><div style="left: 910px; top: 162.194px; font-size: 20px; font-family: sans-serif;">0</div><div style="left: 82.8px; top: 206.593px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.874301);" data-canvas-width="183.60327200000003">General Instructions:</div><div style="left: 99.2px; top: 228.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.789316);" data-canvas-width="14.997">1.</div><div style="left: 136.8px; top: 228.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.814069);" data-canvas-width="269.22614399999986">All the questions are compulsory.</div><div style="left: 99.2px; top: 252.194px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.789316);" data-canvas-width="14.997">2.</div><div style="left: 136.8px; top: 252.194px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.799332);" data-canvas-width="566.7266320000001">The questions paper consists of 30 questions divided into 4 sections A,</div><div style="left: 708.4px; top: 252.194px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.856585);" data-canvas-width="95.08098000000001">B, C and D.</div><div style="left: 99.2px; top: 274.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.789316);" data-canvas-width="14.997">3.</div><div style="left: 136.8px; top: 274.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.809609);" data-canvas-width="740.7918120000004">Section A comprises of 6 questions of 1 mark each. Section B comprises of 6 questions of 2 </div><div style="left: 136.8px; top: 298.193px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.807477);" data-canvas-width="742.071556000001">marks each. Section C comprises of 10 questions of 3 marks each. Section D comprises of 8 </div><div style="left: 136.8px; top: 320.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.792453);" data-canvas-width="212.37751599999996">questions of 4 marks each.</div><div style="left: 99.2px; top: 344.193px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.789316);" data-canvas-width="14.997">4.</div><div style="left: 136.8px; top: 344.193px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.823046);" data-canvas-width="291.001788">There is no overall choice. However</div><div style="left: 427.6px; top: 344.193px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.796801);" data-canvas-width="480.6438519999999">, an internal choice has been provided in two questions of 1 </div><div style="left: 136.8px; top: 366.994px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.793675);" data-canvas-width="756.0287640000007">mark each, two questions of 2 marks each, four questions of 3 marks each and three questions </div><div style="left: 136.8px; top: 390.193px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.799128);" data-canvas-width="695.2409240000004">of 4 marks each. You have to attempt only one of the alternatives in all such questions.</div><div style="left: 99.2px; top: 412.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.789316);" data-canvas-width="14.997">5.</div><div style="left: 136.8px; top: 412.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.832117);" data-canvas-width="105.67886">Use of calcul</div><div style="left: 242px; top: 412.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.788383);" data-canvas-width="174.74504400000004">ators is not permitted.</div><div style="left: 472px; top: 478.193px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.8313);" data-canvas-width="62.347528">Section</div><div style="left: 534.4px; top: 478.193px; font-size: 20px; font-family: sans-serif;">-</div><div style="left: 541.2px; top: 478.193px; font-size: 20px; font-family: sans-serif;">A</div><div style="left: 76.8px; top: 524.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.789316);" data-canvas-width="14.997">1.</div><div style="left: 123.2px; top: 527.793px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.81997);" data-canvas-width="299.74003999999996">Find the value of a, for which point P</div><div style="left: 428px; top: 527.793px; font-size: 20px; font-family: sans-serif;">(</div><div style="left: 440.4px; top: 518.83px; font-size: 14px; font-family: sans-serif;">ୟ</div><div style="left: 442px; top: 540.43px; font-size: 14px; font-family: sans-serif;">ଷ</div><div style="left: 450px; top: 527.793px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.797956);" data-canvas-width="110.11797200000001">, 2) is the mid</div><div style="left: 560px; top: 527.793px; font-size: 20px; font-family: sans-serif;">-</div><div style="left: 566.8px; top: 527.793px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.793712);" data-canvas-width="295.2609359999999">point of the line segment joining the </div><div style="left: 123.2px; top: 556.193px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.816576);" data-canvas-width="75.12497199999999">points Q(</div><div style="left: 198.4px; top: 556.193px; font-size: 20px; font-family: sans-serif;">-</div><div style="left: 205.2px; top: 556.193px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.806446);" data-canvas-width="90.321932">5,4) and R(</div><div style="left: 295.6px; top: 556.193px; font-size: 20px; font-family: sans-serif;">-</div><div style="left: 302.4px; top: 556.193px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.795928);" data-canvas-width="36.612676">1,0).</div><div style="left: 880.8px; top: 524.993px; font-size: 20px; font-family: sans-serif;">1</div><div style="left: 76.8px; top: 603.393px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.789316);" data-canvas-width="14.997">2.</div><div style="left: 123.2px; top: 602.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.820874);" data-canvas-width="303.81922399999996">Find the value of k, for which one roo</div><div style="left: 426.8px; top: 602.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.78108);" data-canvas-width="214.797032">t of the quadratic equation </div><div style="left: 646.8px; top: 602.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.833167);" data-canvas-width="19.996">kx</div><div style="left: 666.4px; top: 599.997px; font-size: 13.2px; font-family: sans-serif;">2</div><div style="left: 673.2px; top: 602.993px; font-size: 20px; font-family: sans-serif;">-</div><div style="left: 680px; top: 602.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.757262);" data-canvas-width="87.842428">14x+8 = 0 </div><div style="left: 768px; top: 602.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.805693);" data-canvas-width="33.033392">is 2.</div><div style="left: 880.8px; top: 603.393px; font-size: 20px; font-family: sans-serif;">1</div><div style="left: 508px; top: 650.593px; font-size: 20px; font-family: sans-serif; transform: scaleX(1.00113);" data-canvas-width="30.033992">OR</div><div style="left: 123.2px; top: 674.593px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.806334);" data-canvas-width="362.487488">Find the value(s) of k for which the equation </div><div style="left: 486px; top: 672.557px; font-size: 20px; font-family: sans-serif;">ݔ</div><div style="left: 498px; top: 670.03px; font-size: 14px; font-family: sans-serif;">ଶ</div><div style="left: 511.2px; top: 672.573px; font-size: 20px; font-family: sans-serif;">+</div><div style="left: 530.4px; top: 672.573px; font-size: 20px; font-family: sans-serif;">5</div><div style="left: 541.6px; top: 672.557px; font-size: 20px; font-family: sans-serif; transform: scaleX(1.21309);" data-canvas-width="21.835631999999997">ݔ݇</div><div style="left: 568.4px; top: 672.573px; font-size: 20px; font-family: sans-serif;">+</div><div style="left: 587.6px; top: 672.573px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.856752);" data-canvas-width="22.275544">16</div><div style="left: 615.2px; top: 672.573px; font-size: 20px; font-family: sans-serif;">=</div><div style="left: 636px; top: 672.573px; font-size: 20px; font-family: sans-serif;">0</div><div style="left: 652.4px; top: 674.593px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.787952);" data-canvas-width="193.94120400000003">has real and equal roots.</div><div style="left: 76.8px; top: 721.793px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.789316);" data-canvas-width="14.997">3.</div><div style="left: 123.2px; top: 726.593px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.812331);" data-canvas-width="149.55008399999997">Write the value of </div><div style="left: 273.2px; top: 724.573px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.850798);" data-canvas-width="26.374723999999997">cot</div><div style="left: 300.4px; top: 722.03px; font-size: 14px; font-family: sans-serif;">ଶ</div><div style="left: 309.2px; top: 724.557px; font-size: 20px; font-family: sans-serif;">θ</div><div style="left: 324.4px; top: 724.557px; font-size: 20px; font-family: sans-serif;">−</div><div style="left: 362.8px; top: 717.63px; font-size: 14px; font-family: sans-serif;">ଵ</div><div style="left: 348.4px; top: 739.23px; font-size: 14px; font-family: sans-serif; transform: scaleX(0.555611);" data-canvas-width="20.0019988">ୱ୧୬</div><div style="left: 368.4px; top: 736.699px; font-size: 11.6px; font-family: sans-serif;">మ</div><div style="left: 376.4px; top: 739.23px; font-size: 14px; font-family: sans-serif;">஘</div><div style="left: 880.8px; top: 721.793px; font-size: 20px; font-family: sans-serif;">1</div><div style="left: 522.8px; top: 779.393px; font-size: 20px; font-family: sans-serif; transform: scaleX(1.00113);" data-canvas-width="30.033992">OR</div><div style="left: 123.2px; top: 803.394px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.937707);" data-canvas-width="17.816436">If </div><div style="left: 141.6px; top: 801.357px; font-size: 20px; font-family: sans-serif; transform: scaleX(1.74874);" data-canvas-width="38.47230400000001">ߠ݊݅ݏ</div><div style="left: 186px; top: 801.374px; font-size: 20px; font-family: sans-serif;">=</div><div style="left: 206.4px; top: 801.357px; font-size: 20px; font-family: sans-serif; transform: scaleX(1.15634);" data-canvas-width="40.471904">ߠݏ݋ܿ</div><div style="left: 247.6px; top: 803.394px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.793175);" data-canvas-width="185.60287199999996">, then find the value of </div><div style="left: 438px; top: 801.374px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.842875);" data-canvas-width="38.772244">2tan</div><div style="left: 476.8px; top: 801.357px; font-size: 20px; font-family: sans-serif;">θ</div><div style="left: 492px; top: 801.374px; font-size: 20px; font-family: sans-serif;">+</div><div style="left: 515.6px; top: 801.374px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.85498);" data-canvas-width="28.214356000000002">cos</div><div style="left: 544.4px; top: 798.83px; font-size: 14px; font-family: sans-serif;">ଶ</div><div style="left: 553.6px; top: 801.357px; font-size: 20px; font-family: sans-serif;">θ</div><div style="left: 76.8px; top: 850.593px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.789316);" data-canvas-width="14.997">4.</div><div style="left: 123.2px; top: 850.193px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.826231);" data-canvas-width="259.58807199999995">If nth term of an A.P. is (2n+1), </div><div style="left: 382.8px; top: 850.193px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.797602);" data-canvas-width="311.23774">what is the sum of its first three terms?</div><div style="left: 880.8px; top: 850.593px; font-size: 20px; font-family: sans-serif;">1</div><div style="left: 76.8px; top: 897.393px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.789316);" data-canvas-width="14.997">5.</div><div style="left: 123.2px; top: 896.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.821868);" data-canvas-width="515.7768240000003">In figure if AD= 6cm, DB=9cm, AE = 8cm and EC = 12cm and </div><div style="left: 638.8px; top: 892.035px; font-size: 18.3998px; font-family: sans-serif;"></div><div style="left: 653.2px; top: 896.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.849933);" data-canvas-width="82.443508">ADE = 48</div><div style="left: 735.6px; top: 893.997px; font-size: 13.2px; font-family: sans-serif;">0</div><div style="left: 742.4px; top: 896.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.843101);" data-canvas-width="51.049788">. Find </div><div style="left: 793.6px; top: 892.035px; font-size: 18.3998px; font-family: sans-serif;"></div><div style="left: 808px; top: 896.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.983237);" data-canvas-width="40.951808">ABC</div><div style="left: 880.8px; top: 897.393px; font-size: 20px; font-family: sans-serif;">1</div><div style="left: 76.8px; top: 1226.59px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.789316);" data-canvas-width="14.997">6.</div><div style="left: 123.2px; top: 1231.39px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.813894);" data-canvas-width="501.0197759999999">After how many decimal places will the decimal expansion of </div><div style="left: 636.4px; top: 1222.43px; font-size: 14px; font-family: sans-serif; transform: scaleX(0.700469);" data-canvas-width="16.110777199999998">ଶଷ</div><div style="left: 624px; top: 1244.03px; font-size: 14px; font-family: sans-serif;">ଶ</div><div style="left: 632px; top: 1241.5px; font-size: 11.6px; font-family: sans-serif;">ర</div><div style="left: 640px; top: 1244.04px; font-size: 14px; font-family: sans-serif;">×</div><div style="left: 650px; top: 1244.03px; font-size: 14px; font-family: sans-serif;">ହ</div><div style="left: 658px; top: 1241.5px; font-size: 11.6px; font-family: sans-serif;">య</div><div style="left: 670.8px; top: 1231.39px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.778123);" data-canvas-width="84.54308799999998">terminate?</div><div style="left: 880.8px; top: 1226.59px; font-size: 20px; font-family: sans-serif;">1</div><div class="endOfContent"></div></div></div><div id="pageContainer2" class="page" style="width: 991px; height: 1403px;" data-page-number="2" data-loaded="true"><div style="width: 991px; height: 1403px;" class="canvasWrapper"><canvas id="page2" moz-opaque="" width="992" height="1404" style="width: 992px; height: 1404px;"></canvas></div><div class="textLayer" style="width: 991px; height: 1403px;"><div style="left: 485.6px; top: 1303.13px; font-size: 18.3998px; font-family: sans-serif;">2</div><div style="left: 487.6px; top: 58.1933px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.8313);" data-canvas-width="62.347528">Section</div><div style="left: 550px; top: 58.1933px; font-size: 20px; font-family: sans-serif;">-</div><div style="left: 556.8px; top: 58.1933px; font-size: 20px; font-family: sans-serif;">B</div><div style="left: 76.8px; top: 101.393px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.789316);" data-canvas-width="14.997">7.</div><div style="left: 123.2px; top: 100.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.886683);" data-canvas-width="183.54328399999994">The HCF and LCM of </div><div style="left: 306.8px; top: 100.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.802731);" data-canvas-width="533.013376">two numbers are 9 and 360 respectively. If one number is 45, find </div><div style="left: 123.2px; top: 123.793px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.786287);" data-canvas-width="141.531688">the other number.</div><div style="left: 880.8px; top: 101.393px; font-size: 20px; font-family: sans-serif;">2</div><div style="left: 508px; top: 167.393px; font-size: 20px; font-family: sans-serif; transform: scaleX(1.00113);" data-canvas-width="30.033992">OR</div><div style="left: 123.2px; top: 194.193px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.802643);" data-canvas-width="85.88281999999998">Show that </div><div style="left: 208.8px; top: 192.173px; font-size: 20px; font-family: sans-serif;">7</div><div style="left: 224.4px; top: 192.157px; font-size: 20px; font-family: sans-serif;">−</div><div style="left: 243.6px; top: 192.957px; font-size: 20px; font-family: sans-serif;">√</div><div style="left: 256.8px; top: 192.173px; font-size: 20px; font-family: sans-serif;">5</div><div style="left: 273.2px; top: 194.193px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.796311);" data-canvas-width="175.98479600000002">is irrational, give that </div><div style="left: 448.8px; top: 192.957px; font-size: 20px; font-family: sans-serif;">√</div><div style="left: 462px; top: 192.173px; font-size: 20px; font-family: sans-serif;">5</div><div style="left: 478.8px; top: 194.193px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.806057);" data-canvas-width="95.92081200000001">is irrational.</div><div style="left: 76.8px; top: 241.393px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.789316);" data-canvas-width="14.997">8.</div><div style="left: 123.2px; top: 240.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.800366);" data-canvas-width="91.24174799999999">Find the 20</div><div style="left: 214.4px; top: 237.997px; font-size: 13.2px; font-family: sans-serif; transform: scaleX(0.784735);" data-canvas-width="10.20155928">th</div><div style="left: 229.6px; top: 240.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.807863);" data-canvas-width="265.786832">term from the last term of the AP</div><div style="left: 500.4px; top: 240.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.831632);" data-canvas-width="115.59687600000001">3,8,13,....,253</div><div style="left: 880.8px; top: 241.393px; font-size: 20px; font-family: sans-serif;">2</div><div style="left: 522.8px; top: 288.193px; font-size: 20px; font-family: sans-serif; transform: scaleX(1.00113);" data-canvas-width="30.033992">OR</div><div style="left: 123.2px; top: 311.793px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.803283);" data-canvas-width="121.29573599999999">If 7 times the 7</div><div style="left: 244.4px; top: 308.797px; font-size: 13.2px; font-family: sans-serif; transform: scaleX(0.784735);" data-canvas-width="10.20155928">th</div><div style="left: 259.6px; top: 311.793px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.806538);" data-canvas-width="327.45449599999995">term of an A.P is equal to 11 times its 11</div><div style="left: 586.8px; top: 308.797px; font-size: 13.2px; font-family: sans-serif; transform: scaleX(0.784735);" data-canvas-width="10.20155928">th</div><div style="left: 602px; top: 311.793px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.78937);" data-canvas-width="167.34652399999996">term, then find its 18</div><div style="left: 769.2px; top: 308.797px; font-size: 13.2px; font-family: sans-serif; transform: scaleX(0.784735);" data-canvas-width="10.20155928">th</div><div style="left: 784.4px; top: 311.793px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.78173);" data-canvas-width="41.431712000000005">term.</div><div style="left: 76.8px; top: 354.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.789316);" data-canvas-width="14.997">9.</div><div style="left: 123.2px; top: 354.593px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.819643);" data-canvas-width="510.6378520000002">Find the coordinates of the point P which divides the join of A(</div><div style="left: 633.6px; top: 354.593px; font-size: 20px; font-family: sans-serif;">-</div><div style="left: 640.4px; top: 354.593px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.80793);" data-canvas-width="105.83882799999999">2,5) and B(3,</div><div style="left: 746.4px; top: 354.593px; font-size: 20px; font-family: sans-serif;">-</div><div style="left: 753.2px; top: 354.593px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.801937);" data-canvas-width="114.67705999999998">5) in the ratio </div><div style="left: 123.2px; top: 377.793px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.775602);" data-canvas-width="25.594879999999996">2:3</div><div style="left: 880.8px; top: 354.993px; font-size: 20px; font-family: sans-serif;">2</div><div style="left: 76.8px; top: 420.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.781094);" data-canvas-width="24.994999999999997">10.</div><div style="left: 123.2px; top: 420.593px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.814498);" data-canvas-width="527.7944200000002">A card is drawn at random from a well shuffled deck of 52 cards. </div><div style="left: 650.8px; top: 420.593px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.810364);" data-canvas-width="184.76304000000002">Find the probability of </div><div style="left: 123.2px; top: 443.793px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.777588);" data-canvas-width="303.25933599999996">getting neither a red card nor a queen.</div><div style="left: 880.8px; top: 420.993px; font-size: 20px; font-family: sans-serif;">2</div><div style="left: 76.8px; top: 490.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.781094);" data-canvas-width="24.994999999999997">11.</div><div style="left: 123.2px; top: 490.593px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.759583);" data-canvas-width="745.1509400000004">Two  dice  are  thrown  at  the  same  time  and  the  product  of  numbers  appearing  on  them  is </div><div style="left: 123.2px; top: 513.393px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.790274);" data-canvas-width="493.92119600000024">noted. Find the probability that the product is a prime number</div><div style="left: 880.8px; top: 490.993px; font-size: 20px; font-family: sans-serif;">2</div><div style="left: 76.8px; top: 560.593px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.781094);" data-canvas-width="24.994999999999997">12.</div><div style="left: 123.2px; top: 560.193px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.821687);" data-canvas-width="221.85562">For what value of p will the</div><div style="left: 350.4px; top: 560.193px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.809016);" data-canvas-width="442.53147599999994">following pair of linear equations have infinitely many </div><div style="left: 123.2px; top: 583.393px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.802506);" data-canvas-width="72.22555200000001">solutions</div><div style="left: 303.2px; top: 606.193px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.79984);" data-canvas-width="16.79664">(p</div><div style="left: 320px; top: 606.193px; font-size: 20px; font-family: sans-serif;">-</div><div style="left: 326.8px; top: 606.193px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.759506);" data-canvas-width="88.862224">3)x+3y = p</div><div style="left: 303.2px; top: 629.393px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.757881);" data-canvas-width="92.46150399999999">px+py = 12</div><div style="left: 880.8px; top: 560.593px; font-size: 20px; font-family: sans-serif;">2</div><div style="left: 472px; top: 672.593px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.8313);" data-canvas-width="62.347528">Section</div><div style="left: 534.4px; top: 672.593px; font-size: 20px; font-family: sans-serif;">-</div><div style="left: 541.2px; top: 672.593px; font-size: 20px; font-family: sans-serif;">C</div><div style="left: 76.8px; top: 713.793px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.781094);" data-canvas-width="24.994999999999997">13.</div><div style="left: 123.2px; top: 713.394px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.83119);" data-canvas-width="526.974584">Use Euclid’s Division Algorithm to find the HCF of 726 and 275.</div><div style="left: 880.8px; top: 713.793px; font-size: 20px; font-family: sans-serif;">3</div><div style="left: 76.8px; top: 760.593px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.781094);" data-canvas-width="24.994999999999997">14.</div><div style="left: 123.2px; top: 760.193px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.816184);" data-canvas-width="357.48848799999985">Find the zeroes of the following polynomial:</div><div style="left: 128.4px; top: 786.993px; font-size: 20px; font-family: sans-serif;">5</div><div style="left: 138px; top: 785.757px; font-size: 20px; font-family: sans-serif;">√</div><div style="left: 151.2px; top: 784.973px; font-size: 20px; font-family: sans-serif;">5</div><div style="left: 162.4px; top: 786.993px; font-size: 20px; font-family: sans-serif;">x</div><div style="left: 172px; top: 783.997px; font-size: 13.2px; font-family: sans-serif;">2</div><div style="left: 178.8px; top: 786.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.739146);" data-canvas-width="62.827431999999995">+30x+8</div><div style="left: 242px; top: 785.757px; font-size: 20px; font-family: sans-serif;">√</div><div style="left: 255.2px; top: 784.973px; font-size: 20px; font-family: sans-serif;">5</div><div style="left: 880.8px; top: 760.593px; font-size: 20px; font-family: sans-serif;">3</div><div style="left: 76.8px; top: 834.193px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.781094);" data-canvas-width="24.994999999999997">15.</div><div style="left: 123.2px; top: 833.793px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.763433);" data-canvas-width="745.1109480000002">Places  A  and  B  are  80  km  apart  from  each  other  on  a  highway.  A  car  starts  from  A  and </div><div style="left: 123.2px; top: 856.593px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.806419);" data-canvas-width="745.130944000001">another from B at the same time. If they move in same direction they meet in 8 hours and if </div><div style="left: 123.2px; top: 879.793px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.791162);" data-canvas-width="647.1705400000003">they move towards each other they meet in 1 hour 20 minutes. Find the speed of </div><div style="left: 770px; top: 879.793px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.788353);" data-canvas-width="37.05258800000001">cars.</div><div style="left: 880.8px; top: 834.193px; font-size: 20px; font-family: sans-serif;">3</div><div style="left: 76.8px; top: 926.993px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.781094);" data-canvas-width="24.994999999999997">16.</div><div style="left: 123.2px; top: 926.593px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.828255);" data-canvas-width="125.89481600000003">The points A(1,</div><div style="left: 249.2px; top: 926.593px; font-size: 20px; font-family: sans-serif;">-</div><div style="left: 256px; top: 926.593px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.830111);" data-canvas-width="210.01798799999995">2) , B(2,3), C (k,2) and D(</div><div style="left: 466px; top: 926.593px; font-size: 20px; font-family: sans-serif;">-</div><div style="left: 472.8px; top: 926.593px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.789316);" data-canvas-width="14.997">4,</div><div style="left: 487.6px; top: 926.593px; font-size: 20px; font-family: sans-serif;">-</div><div style="left: 494.4px; top: 926.593px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.799285);" data-canvas-width="345.29092799999995">3) are the vertices of a parallelogram. Find </div><div style="left: 123.2px; top: 949.393px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.799281);" data-canvas-width="114.29713600000001">the value of k.</div><div style="left: 880.8px; top: 926.993px; font-size: 20px; font-family: sans-serif;">3</div><div style="left: 478px; top: 996.593px; font-size: 20px; font-family: sans-serif; transform: scaleX(1.00113);" data-canvas-width="30.033992">OR</div><div style="left: 123.2px; top: 1020.19px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.810815);" data-canvas-width="348.650256">Find the value of k for which the points (3k</div><div style="left: 471.6px; top: 1020.19px; font-size: 20px; font-family: sans-serif;">-</div><div style="left: 478.4px; top: 1020.19px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.812741);" data-canvas-width="25.19496">1,k</div><div style="left: 503.2px; top: 1020.19px; font-size: 20px; font-family: sans-serif;">-</div><div style="left: 510px; top: 1020.19px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.822934);" data-canvas-width="58.428312">2), (k,k</div><div style="left: 568px; top: 1020.19px; font-size: 20px; font-family: sans-serif;">-</div><div style="left: 574.8px; top: 1020.19px; font-size: 20px; font-family: sans-serif;">7</div><div style="left: 584.8px; top: 1020.19px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.770231);" data-canvas-width="40.051987999999994">) and</div><div style="left: 640.4px; top: 1020.19px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.839832);" data-canvas-width="16.79664">(k</div><div style="left: 656.8px; top: 1020.19px; font-size: 20px; font-family: sans-serif;">-</div><div style="left: 663.6px; top: 1020.19px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.789316);" data-canvas-width="14.997">1,</div><div style="left: 678.8px; top: 1020.19px; font-size: 20px; font-family: sans-serif;">-</div><div style="left: 685.6px; top: 1020.19px; font-size: 20px; font-family: sans-serif;">k</div><div style="left: 695.2px; top: 1020.19px; font-size: 20px; font-family: sans-serif;">-</div><div style="left: 702px; top: 1020.19px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.809903);" data-canvas-width="125.53488800000005">2) are collinear.</div><div style="left: 76.8px; top: 1067.39px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.781094);" data-canvas-width="24.994999999999997">17.</div><div style="left: 123.2px; top: 1076.19px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.798923);" data-canvas-width="87.08258">Prove that </div><div style="left: 232px; top: 1074.16px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.817144);" data-canvas-width="42.491499999999995">ࣂ࢚࢕ࢉ</div><div style="left: 278.8px; top: 1074.16px; font-size: 20px; font-family: sans-serif;">−</div><div style="left: 298.4px; top: 1074.16px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.886746);" data-canvas-width="46.110775999999994">ࣂ࢔ࢇ࢚</div><div style="left: 350px; top: 1074.17px; font-size: 20px; font-family: sans-serif;">=</div><div style="left: 374.8px; top: 1067.23px; font-size: 14px; font-family: sans-serif;">૛</div><div style="left: 383.2px; top: 1067.23px; font-size: 14px; font-family: sans-serif; transform: scaleX(0.569937);" data-canvas-width="22.2275536">࢙࢕ࢉ</div><div style="left: 405.6px; top: 1063.9px; font-size: 11.6px; font-family: sans-serif;">૛</div><div style="left: 413.2px; top: 1067.23px; font-size: 14px; font-family: sans-serif;">ࣂ</div><div style="left: 422.4px; top: 1067.23px; font-size: 14px; font-family: sans-serif;">ି</div><div style="left: 432.4px; top: 1067.23px; font-size: 14px; font-family: sans-serif;">૚</div><div style="left: 376.8px; top: 1088.83px; font-size: 14px; font-family: sans-serif; transform: scaleX(0.591382);" data-canvas-width="61.503696800000014">ࣂ࢙࢕ࢉࣂ࢔࢏࢙</div><div style="left: 880.8px; top: 1067.39px; font-size: 20px; font-family: sans-serif;">3</div><div style="left: 478px; top: 1128.99px; font-size: 20px; font-family: sans-serif; transform: scaleX(1.00113);" data-canvas-width="30.033992">OR</div><div style="left: 123.2px; top: 1152.99px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.799145);" data-canvas-width="91.90161599999999">Prove that  </div><div style="left: 214.8px; top: 1150.96px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.783433);" data-canvas-width="30.553887999999997">࢔࢏࢙</div><div style="left: 245.2px; top: 1150.96px; font-size: 20px; font-family: sans-serif;">ࣂ</div><div style="left: 257.6px; top: 1149.77px; font-size: 20px; font-family: sans-serif;">(</div><div style="left: 266px; top: 1150.96px; font-size: 20px; font-family: sans-serif;">૚</div><div style="left: 282.4px; top: 1150.97px; font-size: 20px; font-family: sans-serif;">+</div><div style="left: 302px; top: 1150.96px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.886746);" data-canvas-width="46.110775999999994">ࣂ࢔ࢇ࢚</div><div style="left: 348px; top: 1149.77px; font-size: 20px; font-family: sans-serif;">)</div><div style="left: 360.8px; top: 1150.97px; font-size: 20px; font-family: sans-serif;">+</div><div style="left: 380px; top: 1150.96px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.848292);" data-canvas-width="44.111176">ࣂ࢙࢕ࢉ</div><div style="left: 424.4px; top: 1149.77px; font-size: 20px; font-family: sans-serif;">(</div><div style="left: 432.8px; top: 1150.96px; font-size: 20px; font-family: sans-serif;">૚</div><div style="left: 449.2px; top: 1150.97px; font-size: 20px; font-family: sans-serif;">+</div><div style="left: 468.4px; top: 1150.96px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.817144);" data-canvas-width="42.491499999999995">ࣂ࢚࢕ࢉ</div><div style="left: 510.8px; top: 1149.77px; font-size: 20px; font-family: sans-serif;">)</div><div style="left: 524.8px; top: 1150.97px; font-size: 20px; font-family: sans-serif;">=</div><div style="left: 545.2px; top: 1150.96px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.833295);" data-canvas-width="43.331331999999996">ࣂࢉࢋ࢙</div><div style="left: 593.2px; top: 1150.97px; font-size: 20px; font-family: sans-serif;">+</div><div style="left: 612.8px; top: 1150.96px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.832654);" data-canvas-width="64.947008">ࣂࢉࢋ࢙࢕ࢉ</div><div style="left: 76.8px; top: 1196.19px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.781094);" data-canvas-width="24.994999999999997">18.</div><div style="left: 123.2px; top: 1195.79px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.810099);" data-canvas-width="743.6712360000012">The radii of two concentric circles are 13 cm and 8 cm. AB is a diameter of the bigger circle </div><div style="left: 123.2px; top: 1218.99px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.79469);" data-canvas-width="157.348524">and BD is a tangent</div><div style="left: 286px; top: 1218.99px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.79334);" data-canvas-width="575.9647840000006">to the smaller circle touching it at D and intersecting the larger circle at </div><div style="left: 123.2px; top: 1241.79px; font-size: 20px; font-family: sans-serif; transform: scaleX(0.825526);" data-canvas-width="310.397908">P on producing. Find the length of AP.</div><div style="left: 880.8px; top: 1196.19px; font-size: 20px; font-family: sans-serif;">3</div><div class="endOfContent"></div></div></div><div id="pageContainer3" class="page" style="width: 991px; height: 1403px;" data-page-number="3"><div class="loadingIcon"></div></div><div id="pageContainer4" class="page" style="width: 991px; height: 1403px;" data-page-number="4"><div class="loadingIcon"></div></div><div id="pageContainer5" class="page" style="width: 991px; height: 1403px;" data-page-number="5"><div class="loadingIcon"></div></div></div>
+        </div>
+
+        <div id="errorWrapper" hidden="true">
+          <div id="errorMessageLeft">
+            <span id="errorMessage"></span>
+            <button id="errorShowMore" data-l10n-id="error_more_info">More Information</button>
+            <button id="errorShowLess" data-l10n-id="error_less_info" hidden="true">Less Information</button>
+          </div>
+          <div id="errorMessageRight">
+            <button id="errorClose" data-l10n-id="error_close">Close</button>
+          </div>
+          <div class="clearBoth"></div>
+          <textarea id="errorMoreInfo" readonly="readonly" hidden="true"></textarea>
+        </div>
+      </div> <!-- mainContainer -->
+
+      <div id="overlayContainer" class="hidden">
+        <div id="passwordOverlay" class="container hidden">
+          <div class="dialog">
+            <div class="row">
+              <p id="passwordText" data-l10n-id="password_label">Enter the password to open this PDF file.</p>
+            </div>
+            <div class="row">
+              <!-- The type="password" attribute is set via script, to prevent warnings in Firefox for all http:// documents. -->
+              <input id="password" class="toolbarField">
+            </div>
+            <div class="buttonRow">
+              <button id="passwordCancel" class="overlayButton"><span data-l10n-id="password_cancel">Cancel</span></button>
+              <button id="passwordSubmit" class="overlayButton"><span data-l10n-id="password_ok">OK</span></button>
+            </div>
+          </div>
+        </div>
+        <div id="documentPropertiesOverlay" class="container hidden">
+			<div class="dialog">
+				<div class="row">
+					<textarea name="fileNameField" id="fileNameField" readonly="readonly"></textarea>
+					<input type="hidden" name="rellabel" id="rellabel">
+				</div>
+				<div class="row">
+					<ul class="input-image color-range">
+						<li class="label">Pick a color:</li>
+						<li>
+							<input type="radio" name="label-color" id="label-color-1" value="red">
+							<label for="label-color-1" class="red">Red</label>
+						</li>
+						<li>
+							<input type="radio" name="label-color" id="label-color-2" value="green">
+							<label for="label-color-2" class="green">Green</label>
+						</li>
+						<li>
+							<input type="radio" name="label-color" id="label-color-3" value="blue">
+							<label for="label-color-3" class="blue">Blue</label>
+						</li>
+						<li>
+							<input type="radio" name="label-color" id="label-color-4" value="cyan">
+							<label for="label-color-4" class="cyan">Cyan</label>
+						</li>
+						<li>
+							<input type="radio" name="label-color" id="label-color-5" value="yellow">
+							<label for="label-color-5" class="yellow">Yellow</label>
+						</li>
+					</ul>
+				</div>
+				<div class="row">
+					<textarea name="fileNoteField" id="fileNoteField" maxlength="250"></textarea>							
+				</div>           
+				<span id="spCount"></span>
+				<div class="buttonRow">
+					<button id="documentPropertiesSubmit" class="overlayButton btn"><span>Submit</span></button>
+					<button id="documentPropertiesClose" class="overlayButton btn"><span>Close</span></button>
+				</div>
+			</div>
+		</div>
+      </div>  <!-- overlayContainer -->
+
+    </div> <!-- outerContainer -->
+    <div id="printContainer"></div>
+<div id="mozPrintCallback-shim" hidden="">
+  <style>
+@media print {
+  #printContainer div {
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+}
+  </style>
+  <style scoped="">
+#mozPrintCallback-shim {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 9999999;
+
+  display: block;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#mozPrintCallback-shim[hidden] {
+  display: none;
+}
+@media print {
+  #mozPrintCallback-shim {
+    display: none;
+  }
+}
+
+#mozPrintCallback-shim .mozPrintCallback-dialog-box {
+  display: inline-block;
+  margin: -50px auto 0;
+  position: relative;
+  top: 45%;
+  left: 0;
+  min-width: 220px;
+  max-width: 400px;
+
+  padding: 9px;
+
+  border: 1px solid hsla(0, 0%, 0%, .5);
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+
+  background-color: #474747;
+
+  color: hsl(0, 0%, 85%);
+  font-size: 16px;
+  line-height: 20px;
+}
+#mozPrintCallback-shim .progress-row {
+  clear: both;
+  padding: 1em 0;
+}
+#mozPrintCallback-shim progress {
+  width: 100%;
+}
+#mozPrintCallback-shim .relative-progress {
+  clear: both;
+  float: right;
+}
+#mozPrintCallback-shim .progress-actions {
+  clear: both;
+}
+  </style>
+  <div class="mozPrintCallback-dialog-box">
+    <!-- TODO: Localise the following strings -->
+    Preparing document for printing...
+    <div class="progress-row">
+      <progress value="0" max="100"></progress>
+      <span class="relative-progress">0%</span>
+    </div>
+    <div class="progress-actions">
+      <input type="button" value="Cancel" class="mozPrintCallback-cancel">
+    </div>
+  </div>
+</div>
+
+  
+
+
+<input id="fileInput" class="fileInput" type="file"></body></html>
