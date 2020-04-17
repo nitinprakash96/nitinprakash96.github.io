@@ -2,13 +2,14 @@
 title:       Nitin Prakash
 email:       prakash.nitin63@gmail.com
 author:      Nitin Prakash
-description: "A place where I store my thoughts"
+description: ""
 baseurl:     ""
 url:         "http://thenitinprakash.com"
 date_format: "%b %-d, %Y"
 header_pages:
  - notes.md
  - about.md
+ - gallery.md
 
  # Google analytics
 google_analytics: "UA-120923664-1"
@@ -23,6 +24,7 @@ disqus_shortname: thenitinprakash
 github_username: nitinprakash96
 twitter_username: nitinprakash96
 paypal_url: nitinprakash96
+instagram_username: nitin_prakash96
 
 # Post sharing icons
 show_social_icons:    true
