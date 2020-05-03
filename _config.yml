@@ -7,9 +7,7 @@ baseurl:     ""
 url:         "http://thenitinprakash.com"
 date_format: "%b %-d, %Y"
 header_pages:
- - notes.md
  - about.md
- - gallery.md
 
  # Google analytics
 google_analytics: "UA-120923664-1"

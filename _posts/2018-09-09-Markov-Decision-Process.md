@@ -4,6 +4,7 @@ title:      Markov Decision Process
 author:     Nitin Prakash
 summary:    How well do we know it?
 category:   Blog
+tags:       [reinforcement-learning]
 ---
 
 In the previous post we saw the what kind of technicalities Reinforcement learning present to us. We know what an agent-environment interface is. We also looked up the reward-punishment process. But there's a lot of questions that still need to be answered. For example,
