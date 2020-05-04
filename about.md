@@ -5,7 +5,10 @@ permalink: /about/
 tags: about
 ---
 
-![Jedi](/images/me.JPG)
+
+<p align="center">
+  <img src="/images/me-1.JPG" style="width:450px;height:500px;">
+</p>
 
  Hi, I'm Nitin Prakash. I live in Bangalore, India. I started out as science person having interest in Chemistry but would eventually go on to pursue Computer Science and Engineering. I wrote my very first code in Visual Basic as a school course subject. But later on(10 years later duh!) I switched to C. I am now quite comfortable with Python, C++ and Clojure.
 
