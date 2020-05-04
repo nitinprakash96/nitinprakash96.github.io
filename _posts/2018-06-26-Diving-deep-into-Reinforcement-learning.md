@@ -5,6 +5,7 @@ author:     Nitin Prakash
 summary:    Now that we know a little about RL, let's talk more examples and elements.
 comments:   true
 category:   Blog
+tags:       [reinforcement-learning]
 ---
 
 In the [previous post](http://www.thenitinprakash.com/blog/2018/06/19/Reinforcement-Learning-What-And-Why/) I gave an introduction to RL and exlpained very briefly how things are and why is it any different from other machine learning methods.

@@ -4,6 +4,7 @@ title:      Dynamic Programming
 author:     Nitin Prakash
 summary:    You can run, but you can't hide.
 category:   Blog
+tags:       [reinforcement-learning]
 ---
 
 Dynamic programming is a technique for solving a complex problem by breaking it down into a collection of simpler subproblems. Smaller subproblems are solved only once and stored in a data structure like array, map etc. The fundamental idea being to optimize a given recursive problem and improve upon the complexity.
