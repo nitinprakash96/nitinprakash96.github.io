@@ -113,9 +113,9 @@ user> (sum 1 2 4)
 
 ### REPL
 
-This stands for _Read-Eval-Print-Loop_. The REPL reads in text through the reader and further transforms it into a Clojure data structure. We can imagince REPL as our playground where we can test running code or even try out new ideas.
+This stands for _Read-Eval-Print-Loop_. The REPL reads in text through the reader and further transforms it into a Clojure data structure. We can imagine REPL as our playground where we can test running code or even try out new ideas.
 
-The reason it is such a fantastic feature is because of the feedback loop which tremendously enhances development cycle. This kind of feature is not available for most languages. We'll see the power of REPL in further sections. 
+The reason it is such a fantastic feature is because of the feedback loop which tremendously enhances development cycle. This kind of feature is not available for most languages. We'll see the power of REPL in further sections. You can also read more about REPL [here](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop).
 
 
 ### Pure functions
@@ -169,7 +169,7 @@ user> (keyword 100)
 => nil
 ```
 
-Don't worry about the functioning of `keyword?` right now. We'll get to inbuilt functions soon. What I would like you to understand is that keywords provide a very fast equality test. And also these are the keys of a hashmap in clojure.
+Don't worry about the functioning of `keyword?` right now. You can perhaps go through [cheatsheet](https://clojure.org/api/cheatsheet) that has various built-in functions listed categorically. What I would like you to understand is that keywords provide a very fast equality test. And also these are the keys of a hashmap in clojure.
 
 ```clojure
 user> (def sample-map {:a 1 :b 2})
