@@ -5,7 +5,6 @@ permalink: /about/
 tags: about
 ---
 
-
 <p align="center">
   <img src="/images/me-1.jpg" style="width:450px;height:500px;">
 </p>
