@@ -24,3 +24,5 @@ Included is a compilation of my highlights from each book.
 -   [Everybody communicates, Few connect](https://www.notion.so/Everybody-communicates-Few-connect-6ce9237a5eae4b2d96b7dafc874a728e)
 
 -   [Sapiens: A brif history of humankind](https://www.notion.so/Sapiens-2ec4ea9d7bd64beca21e3d001967cd3e)
+
+-   [The Art of Optimism](https://www.notion.so/The-Art-of-Optimism-d3bfe64f4cca40c380ccdd9dd8b2e61f)
