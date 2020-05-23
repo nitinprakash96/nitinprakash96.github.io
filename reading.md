@@ -26,3 +26,5 @@ Included is a compilation of my highlights from each book.
 -   [Sapiens: A brif history of humankind](https://www.notion.so/Sapiens-2ec4ea9d7bd64beca21e3d001967cd3e)
 
 -   [The Art of Optimism](https://www.notion.so/The-Art-of-Optimism-d3bfe64f4cca40c380ccdd9dd8b2e61f)
+
+-   [The Subtle art of not giving a fuck](https://www.notion.so/The-subtle-art-of-not-giving-a-fuck-fcde2771189b41958cad70a72e908cb5)
