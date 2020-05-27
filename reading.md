@@ -28,3 +28,5 @@ Included is a compilation of my highlights from each book.
 -   [The Art of Optimism](https://www.notion.so/The-Art-of-Optimism-d3bfe64f4cca40c380ccdd9dd8b2e61f)
 
 -   [The Subtle art of not giving a fuck](https://www.notion.so/The-subtle-art-of-not-giving-a-fuck-fcde2771189b41958cad70a72e908cb5)
+
+-   [The Perks of being a Wallflower](https://www.notion.so/The-Perks-of-being-a-Wallflower-87f294f64a814f438fb1582ddc11284b)
