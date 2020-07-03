@@ -32,3 +32,5 @@ Included is a compilation of my highlights from each book.
 -   [The Perks of being a Wallflower](https://www.notion.so/The-Perks-of-being-a-Wallflower-87f294f64a814f438fb1582ddc11284b)
 
 -   [The One Thing](https://www.notion.so/The-One-thing-24c4ca7c0ffb42259458c4cf8b2ae5d1)
+
+-   [Bad Blood: Secrets and Lies in a Silicon Valley Startup](https://www.notion.so/Bad-Blood-Secrets-and-Lies-in-a-Silicon-Valley-Startup-4194944976d34c4f95660b7f88ed5fbc)
