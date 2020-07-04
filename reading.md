@@ -34,3 +34,5 @@ Included is a compilation of my highlights from each book.
 -   [The One Thing](https://www.notion.so/The-One-thing-24c4ca7c0ffb42259458c4cf8b2ae5d1)
 
 -   [Bad Blood: Secrets and Lies in a Silicon Valley Startup](https://www.notion.so/Bad-Blood-Secrets-and-Lies-in-a-Silicon-Valley-Startup-4194944976d34c4f95660b7f88ed5fbc)
+
+-   [A Brief History of Time](https://www.notion.so/A-Brief-history-of-time-5a4e18e5f50640d6a83df064a38a99f0)
