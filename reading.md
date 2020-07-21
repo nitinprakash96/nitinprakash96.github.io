@@ -36,3 +36,5 @@ Included is a compilation of my highlights from each book.
 -   [Bad Blood: Secrets and Lies in a Silicon Valley Startup](https://www.notion.so/Bad-Blood-Secrets-and-Lies-in-a-Silicon-Valley-Startup-4194944976d34c4f95660b7f88ed5fbc)
 
 -   [A Brief History of Time](https://www.notion.so/A-Brief-history-of-time-5a4e18e5f50640d6a83df064a38a99f0)
+
+-   [Can't hurt me: Master your mind and defy the odds](https://www.notion.so/Can-t-hurt-me-f093dcee84d241ae9d4b738d5838340a)
