@@ -38,3 +38,7 @@ Included is a compilation of my highlights from each book.
 -   [A Brief History of Time](https://www.notion.so/A-Brief-history-of-time-5a4e18e5f50640d6a83df064a38a99f0)
 
 -   [Can't hurt me: Master your mind and defy the odds](https://www.notion.so/Can-t-hurt-me-f093dcee84d241ae9d4b738d5838340a)
+
+-   [Gitanjali](https://www.notion.so/Gitanjali-21d24b0b767e4e16ac6cec31daeb78b8)
+
+-   [The Ride of a Lifetime: Lessons Learned from 15 Years as CEO of the Walt Disney Company](https://www.notion.so/The-Ride-of-a-lifetime-32113ef12ae04ea196b7a2ea68cab5ef)
