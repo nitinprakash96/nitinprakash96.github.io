@@ -42,3 +42,7 @@ Included is a compilation of my highlights from each book.
 -   [Gitanjali](https://www.notion.so/Gitanjali-21d24b0b767e4e16ac6cec31daeb78b8)
 
 -   [The Ride of a Lifetime: Lessons Learned from 15 Years as CEO of the Walt Disney Company](https://www.notion.so/The-Ride-of-a-lifetime-32113ef12ae04ea196b7a2ea68cab5ef)
+
+-   [Shape up](https://www.notion.so/Shape-up-4390f9f3764e4845b3b4ec15a50158f2)
+
+-   [The Silent Patient](https://www.notion.so/The-Silent-Patient-55721d5b4b484da296b9ff99c5e6fa4c)
