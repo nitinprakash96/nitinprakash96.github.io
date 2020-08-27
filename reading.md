@@ -46,3 +46,7 @@ Included is a compilation of my highlights from each book.
 -   [Shape up](https://www.notion.so/Shape-up-4390f9f3764e4845b3b4ec15a50158f2)
 
 -   [The Silent Patient](https://www.notion.so/The-Silent-Patient-55721d5b4b484da296b9ff99c5e6fa4c)
+
+-   [21 Lessons for the 21st Century](https://www.notion.so/21-Lessons-for-the-21st-Century-6714491dcf134c1081f63d6b979db523)
+
+-   [Shoe Dog](https://www.notion.so/Highlights-from-Phil-Knight-s-Show-Dog-1127c2abab0746339dbc80cd79482cf3)
