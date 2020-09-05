@@ -50,3 +50,5 @@ Included is a compilation of my highlights from each book.
 -   [21 Lessons for the 21st Century](https://www.notion.so/21-Lessons-for-the-21st-Century-6714491dcf134c1081f63d6b979db523)
 
 -   [Shoe Dog](https://www.notion.so/Highlights-from-Phil-Knight-s-Show-Dog-1127c2abab0746339dbc80cd79482cf3)
+
+-   [1984](https://www.notion.so/1984-699fa0fb1ae44ad2b073145bbfae3aa2)
