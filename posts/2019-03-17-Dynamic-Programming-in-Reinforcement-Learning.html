@@ -6,8 +6,8 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Nitin Prakash</title>
-    <link rel="stylesheet" href="./css/default.css" />
-    <link rel="stylesheet" href="./css/syntax.css" />
+    <link rel="stylesheet" href="../css/default.css" />
+    <link rel="stylesheet" href="../css/syntax.css" />
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
 </head>
@@ -15,53 +15,38 @@
 <body>
     <header>
         <div class="logo">
-            <a href="./">Nitin Prakash</a>
+            <a href="../">Nitin Prakash</a>
         </div>
         <nav>
-            <a href="./blog.html">Blog</a>
-            <a href="./reading.html">Reading List</a>
-            <a href="./archive.html">Archive</a>
+            <a href="../blog.html">Blog</a>
+            <a href="../reading.html">Reading List</a>
+            <a href="../archive.html">Archive</a>
         </nav>
     </header>
 
     <main role="main">
-        <h2>Welcome</h2>
-
-<p>Welcome to my blog!</p>
-
-<p>I've reproduced a list of recent posts here for your reading pleasure:</p>
-
-<h2>Posts</h2>
+        <article>
+    <section class="header">
+        Posted on March 17, 2019
+        
+            by Nitin Prakash
+        
+    </section>
+    <section>
+        <p>Dynamic programming is a technique for solving a complex problem by breaking it down into a collection of simpler subproblems. Smaller subproblems are solved only once and stored in a data structure like array, map etc. The fundamental idea being to optimize a given recursive problem and improve upon the complexity.</p>
+<p>Stating the same as an RL paradigm:</p>
+<pre><code>Dymanic programming refers to solving a given problem using a collection
+of algorithms that computes optimal policies given a perfect model of the
+environment as a finite Markov decision process.</code></pre>
+<p>From the above reference, it should be clear that when we talk about DP we are just formulating a structure for the search of an optimal policy. In any paradigm of solving problems, DP requires two conditions to be satisfied:</p>
 <ul>
-    
-        <li>
-            <a href="./posts/2020-04-25-Into-Clojure.html">Clojure. An introduction</a> - April 25, 2020
-        </li>
-    
-        <li>
-            <a href="./posts/2019-03-17-Dynamic-Programming-in-Reinforcement-Learning.html">Dynamic Programming</a> - March 17, 2019
-        </li>
-    
-        <li>
-            <a href="./posts/2018-09-09-Markov-Decision-Process.html">Markov Decision Process</a> - September  9, 2018
-        </li>
-    
-        <li>
-            <a href="./posts/2018-06-26-Diving-deep-into-Reinforcement-learning.html">Diving deep into Reinforcement Learning</a> - June 26, 2018
-        </li>
-    
-        <li>
-            <a href="./posts/2018-06-19-Reinforcement-Learning-What-And-Why%3F.html">Reinforcement Learning. What and Why?</a> - June 19, 2018
-        </li>
-    
-        <li>
-            <a href="./posts/2017-07-19-Why-I-Chose-Jekyll.html">Why I chose Jekyll over Hugo and WordPress</a> - July 19, 2017
-        </li>
-    
+<li>Optimal substructure</li>
+<li>Ovarlapping subproblems</li>
 </ul>
+<p>Fortunately, MDPs satisfy both the properties.</p>
+    </section>
+</article>
 
-
-<p>…or you can find more in the <a href="./archive.html">archives</a>.</p>
     </main>
 
     <!-- Footer -->

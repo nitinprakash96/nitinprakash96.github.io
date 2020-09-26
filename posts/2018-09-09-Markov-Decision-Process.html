@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nitin Prakash</title>
+    <link rel="stylesheet" href="../css/default.css" />
+    <link rel="stylesheet" href="../css/syntax.css" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="../">Nitin Prakash</a>
+        </div>
+        <nav>
+            <a href="../blog.html">Blog</a>
+            <a href="../reading.html">Reading List</a>
+            <a href="../archive.html">Archive</a>
+        </nav>
+    </header>
+
+    <main role="main">
+        <article>
+    <section class="header">
+        Posted on September  9, 2018
+        
+            by Nitin Prakash
+        
+    </section>
+    <section>
+        <p>In the previous post we saw the what kind of technicalities Reinforcement learning present to us. We know what an agent-environment interface is. We also looked up the reward-punishment process. But there’s a lot of questions that still need to be answered. For example, - Where’s the boundary in agent-environment interface? - Do we rely on immediate rewards and overlook that reward generated in long term? - What are the characteristics of a state an agent is present in?</p>
+<p>I’ll try to answer such questions while explaining MDPs.</p>
+<p>MDPs are pretty much the whole process of an agent making decision and trying to maximize rewards. But things are much more complex that just that statement. To understand MDPs, we’ll first need to know what a Markov process is.</p>
+<h2 id="markov-processes">Markov Processes</h2>
+<pre><code>
+A Markov process is a sequence of states over 
+disctrete time steps in such a way that the
+past decisions do not affect the future decision making process.
+</code></pre>
+<p>The latter phrase is also know as the <strong>Markov Proporty</strong>. Formally, Markov property states that <em>The future is independent of the past given the present</em>. We can represent a markov process mathematically using a tuple <strong>(S, T)</strong>. Here <strong>S</strong> represents a finite set of states and <strong>T</strong> is the state tranisition probabilty matrix. So basically if an agent makes a transition from a state <strong>S</strong> to <strong><span class="math inline"><em>S</em>′</span></strong>, we can represent the markov process as:</p>
+<p><br /><span class="math display">$$
+\begin{align}
+P_{SS'} = p\left[S_{t + 1} = S' | S_{t} = S\right]
+\end{align}
+$$</span><br /></p>
+<p align="center">
+<img src="../images/2018-09-09-state.png">
+<p style="font-size: 70%" align="center">
+© Sutton &amp; Barto
+</p>
+</p>
+<p>Let’s break down the above equation into much simpler statements. Imagine an agent interacting with an environmnet over a series of time steps <em>t = 0, 1, 2…</em>. For each time step, the agent recieves a representation of the environment’s state which further results into the action taken. And when the agent recieves a numerical reward <strong><span class="math inline"><em>R</em><sub><em>t</em> + 1</sub></span></strong> for the action taken in the corresponding state <strong><span class="math inline"><em>S</em><sub><em>t</em></sub></span></strong>, it finds itself in a new state <strong><span class="math inline"><em>S</em><sub><em>t</em> + 1</sub></span></strong>. So the series will look like:</p>
+<p><br /><span class="math display">$$
+\begin{align}
+S_0, A_0, R_1, S_1, A_1, R_2, S_2, A_2, R_3,...
+\end{align}
+$$</span><br /></p>
+<p>Note that we are considering discrete time steps only because it’s a lot more mathematically convenient although the idea can be extended to constinuous time steps.</p>
+<p>In a finite MDP, the sets of states, actions, and rewards <em>(S, A, and R)</em> all have a finite number of elements. In this case, the random variables <em><span class="math inline"><em>R</em><sub><em>t</em></sub></span></em> and <em><span class="math inline"><em>S</em><sub><em>t</em></sub></span></em> have well defined discrete probability distributions dependent only on the preceding state and action. This means that for particular values of these random variables, <span class="math inline"><em>s</em> ∈ <em>S</em></span> and <span class="math inline"><em>r</em> ∈ <em>R</em></span>, there is a probabilty of those values occuring at time step <em>t</em>, given a particular value of peceding state and action. Mathematically, it can be stated as:</p>
+<p><br /><span class="math display">$$
+\begin{align}
+p\left(s', r | s, a\right) = Pr\left\{S_{t} = s', R_{t} = r | S_{t − 1} = s, A_{t − 1} = a\right\}
+\end{align}
+$$</span><br /></p>
+<p>The above definition is nothing but markov process with values. There are a lot of other notations that are conventionally used. In order to make the Markov process representation easier for us, let’s simplify it a little bit. Earlier, we had a tuple <strong>(S, T)</strong> that defined a markov process. Now we add two more elements to it, <strong>R</strong> and <strong><span class="math inline"><em>γ</em></span></strong>. Therefore, Markov reward process can be stated as <strong>(S, P, R, <span class="math inline"><em>γ</em></span>)</strong>, where:</p>
+<ul>
+<li><p>Reward function <strong>R</strong>, <br /><span class="math display">$$
+\begin{align}
+R_s = E\left[R_{t+1} | S_t = s\right]
+\end{align}
+$$</span><br /></p></li>
+<li><p>State transition probabity matrix <strong>P</strong>, <br /><span class="math display">$$
+\begin{align}
+P_{SS'} = p\left[S_{t + 1} = S' | S_{t} = S\right]
+\end{align}
+$$</span><br /></p></li>
+<li><p>Discount factor, <br /><span class="math display">$$
+\begin{align}
+\gamma \in [0, 1]
+\end{align}
+$$</span><br /></p></li>
+</ul>
+<p>Even after all such definitions, MDP framework is flexible and the idea can be extended to much more complex problems. One of them being considering continuous time duration instead of discrete time steps. Even the idea of actions can be extended. For example, some actions might control what an agent chooses to think about, or where it focuses its attention. There is no physical boundary between an agent and an environment. The general rule we follow is that anything that cannot be changed arbitrarily by the agent is considered to be outside of it and therefore part of the environment. We do not assume that everything in the environment is unknown to the agent. Also, the boundary can be located at different places for different purposes. The boundary for making high-level decisions can vary from the boundary for low-level decisions.</p>
+<p>Now that we know what a Markov process is, we can generalize that any learning task that is based on actions, states and rewards can fit into this particular segment. Although, it is to be kept in mind that <em>all the decision based learning problem might not be a markov process</em>.</p>
+<h3 id="examples">Examples</h3>
+<p>Let’s go ahead and frame some examples that we can think of as a Markov process.</p>
+<p>One such example could be of a robot trying to escape from a maze. We can define the possible states as the position of the robot at a particular time step. The actions can be said to be the path it decides to take. For example, to move forward, backwards, or sideways. Rewards can be negative if the robot collides with a wall for his action and positive for every correct action. Therefore, this particular example can be stated as a tuple (S, P, R, <span class="math inline"><em>γ</em></span>) which is the definition of a Markov reward process.</p>
+<br>
+<p align="center">
+<img src="../images/2018-09-09-maze.jpg">
+</p>
+<p><br> Another example can be learning how to drive a car around the streets. The state could be a vector representing the distance to each of the lateral sides, the directional heading, the velocity and acceleration of the car. The actions could be to change any of the state vectors i.e. to accelerate or decelerate or to change heading. The rewards could be zero if the car is proceeding comfortably along and minus one if the car collides with an obstable(person, wall etc).</p>
+<p align="center">
+<img src="../images/2018-09-09-cars.png">
+<p style="font-size: 70%" align="center">
+© xkcd
+</p>
+</p>
+<h2 id="returns-and-value-function">Returns and Value function</h2>
+<p>Until now we’ve looked into the kind of reinforcement learning tasks and the concept of states. Previously, we saw that the agent’s goal is to maximize the cumulative reward it receives in the long run. How might this be defined formally? I’ll be answering such questions in this section.</p>
+<p>Let’s suppose that sequence of rewards received after time step <em>t</em> is denoted <span class="math inline"><em>R</em><sub><em>t</em> + 1</sub></span>, <span class="math inline"><em>R</em><sub><em>t</em> + 2</sub></span> , <span class="math inline"><em>R</em><sub><em>t</em> + 3</sub></span>. What we need to do is maximize the <strong>expected return</strong>, denoted by <strong><span class="math inline"><em>G</em><sub><em>t</em></sub></span></strong>, is defined as some specific function of the reward sequence. We say some specific function because there are multiple forms to it. The simplest being:</p>
+<p><br /><span class="math display">$$
+\begin{align}
+G_t = R_{t+1} + R_{t+2} + R_{t+3} + \cdots + R_T
+\end{align}
+$$</span><br /></p>
+<p>where <strong>T</strong> is the final time step in the sequence. But what if <strong>T = <span class="math inline">∞</span></strong> i.e., the task goes on to continue without any limit. Then the return value as per the stated formula becomes problematic because it could easily tend to infinty. Therefore, we introduce the concept of <em>discounting</em>. According to this approach, the agent tries to select actions so that the sum of the discounted rewards it receives over the future is maximized. In particular, it chooses <span class="math inline"><em>A</em><sub><em>t</em></sub></span> to maximize the expected <strong>discounted return</strong>.</p>
+<p><br /><span class="math display">$$
+\begin{align}
+G_t &amp; = R_{t+1} + \gamma R_{t+2} + \gamma^2R_{t+3} + \cdots \\
+    &amp; = \sum_{k=0}^\infty \gamma^k R_{t + k + 1} 
+\end{align}
+$$</span><br /></p>
+<ul>
+<li>The discount <span class="math inline"><em>γ</em> ∈ [0, 1]</span> is the present value of future rewards.</li>
+<li>The value of receiving reward R after k + 1 time-steps is <span class="math inline"><em>γ</em><sup><em>k</em></sup><em>R</em></span>.</li>
+<li>If <span class="math inline"><em>γ</em></span> = 0, the agent is <strong>myopic</strong> in being concerned only with maximizing immediate rewards. The objective being learning how to choose <span class="math inline"><em>A</em><sub><em>t</em></sub></span> in order to maximize only <span class="math inline"><em>R</em><sub><em>t</em> + 1</sub></span>.</li>
+<li>If <span class="math inline"><em>γ</em></span> = 1, the return objective takes future rewards into account more strongly. We can say that the agent becomes more <strong>farsighted</strong>.</li>
+</ul>
+<p>Here, the discount rate determines the present value of future rewards: a reward received k time steps in the future is worth only <span class="math inline"><em>γ</em><sup><em>k</em> − 1</sup></span> times what it would be worth if it were received immediately. But other than being mathematically convenient, what may be the possible advantages of discounted return? One of the factor is that discounted return avoid infinte returns in a cyclic markov process as the math doesn’t work out well for cyclic cases. Another reason is the uncertainity about the future as it may not be fully represented.</p>
+<h2 id="policies-and-value-functions">Policies and Value Functions</h2>
+<p>There is a notion of <em>effective state</em> that measures the future rewards in terms of expected return. These functions of states that measure it’s effectiveness i.e., how good it is for an agent to be in that particular state are called <strong>Value functions</strong>. But value functions are defined with respect to particular ways of acting, called <strong>policies</strong>.</p>
+<pre><code>Formally, a policy can be defined as a mapping from states
+to probabilities of selecting each possible action.</code></pre>
+<p>A policy in reinforcement learning is denoted by <strong><span class="math inline"><em>π</em></span></strong>. So, if an agent is following a policy <span class="math inline"><em>π</em></span> at a given time step t, then <span class="math inline"><em>π</em>(<em>a</em>∥<em>s</em>)</span> is the probability that <span class="math inline"><em>A</em><sub><em>t</em></sub></span> = a if <span class="math inline"><em>S</em><sub><em>t</em></sub></span> = s. The value of a state <em>s</em> under a policy <em><span class="math inline"><em>π</em></span></em>, denoted <span class="math inline"><em>v</em><sub><em>π</em></sub>(<em>s</em>)</span>, is the expected return when starting in <em><span class="math inline"><em>s</em></span></em> and following <em><span class="math inline"><em>π</em></span></em> thereafter. Basically, a value function of a state tells us how <em>good</em> it is for our agent to be in that particular state under some policy <span class="math inline"><em>π</em></span>. Therefore, if we state the value mathematically for MDPs</p>
+<p><br /><span class="math display">$$
+\begin{align}
+v_\pi (s) = E_\pi\left[G_t | S_t = s\right]
+\end{align}
+$$</span><br /></p>
+<p>where <span class="math inline"><em>E</em><sub><em>π</em></sub>[]</span> denotes the expected value of a random variable given that the agent follows policy <em><span class="math inline"><em>π</em></span></em>, and <em>t</em> is any time step. Similarly, we define the value of taking action <em>a</em> in state <em>s</em> under a policy <span class="math inline"><em>π</em></span> as <em>Action-value function for policy <span class="math inline"><em>π</em></span></em> and it can be stated as</p>
+<p><br /><span class="math display">$$
+\begin{align}
+q_\pi (s, a) = E_\pi\left[G_t | S_t = s, A_t = a\right]
+\end{align}
+$$</span><br /></p>
+<p>The value functions <span class="math inline"><em>v</em><sub><em>π</em></sub></span> and <span class="math inline"><em>q</em><sub><em>π</em></sub></span> are estimated from experience. In general, we solve a reinforcement learning task by finding a policy that maximizes the output of the value function over the long run. Therefore, out of existant policies, we chose one that generates the maximum reward. A policy <span class="math inline"><em>π</em></span> will be preferred over a policy <span class="math inline"><em>π</em>′</span> if its expected return is greater than or equal to that of <span class="math inline"><em>π</em>′</span> for all states. This is called an optimal policy. Note that if there exists more than one optimal policy then all of them must share the same state-value function and action-value function.</p>
+<h2 id="bellman-equation">Bellman Equation</h2>
+<p>The Bellman equation expresses the relationship between a value of a state and the value of a successor state and they are crucial to understand how Reinforcement Learning algorithms work. To derive Bellman equation, we go back to the value function,</p>
+<p><br /><span class="math display">$$
+\begin{align}
+v_\pi (s) = E_\pi\left[G_t | S_t = s\right]
+\end{align}
+$$</span><br /></p>
+<p>This value function can be decomposed into two parts: - Immediate reward <span class="math inline"><em>R</em><sub><em>t</em> + 1</sub></span> - And discount values of succeding states</p>
+<p><br /><span class="math display">$$
+\begin{align}
+v_\pi (s) &amp; = E\left[G_t | S_t = s\right]\\
+ &amp; = E\left[R_{t+1} + \gamma R_{t+2} + \gamma^2R_{t+3} + \cdots | S_t = s\right] \\
+ &amp; = E\left[R_{t+1} + \gamma (R_{t+2} + \gamma R_{t+3} + \cdots) | S_t = s\right] \\
+ &amp; = E\left[R_{t+1} + \gamma G_{t+1} | S_t = s\right]
+ \end{align}
+$$</span><br /></p>
+<p>In the above equation <span class="math inline"><em>G</em><sub><em>t</em> + 1</sub></span> is the discounted expected return of successor states and can be replaced by <span class="math inline"><em>v</em>(<em>S</em><sub><em>t</em> + 1</sub>)</span>, giving us:</p>
+<p><br /><span class="math display">$$
+\begin{align}
+v_\pi (s) &amp; = E\left[G_t | S_t = s\right]\\
+ &amp; = E\left[R_{t+1} + \gamma v(S_{t+1}) | S_t = s\right]
+ \end{align}
+$$</span><br /></p>
+<p>This equation is called the Bellman’s equation for a Markov process. Keep in mind that Bellman equation exists for both value function and action-value function.</p>
+<p><br /><span class="math display">$$
+\begin{align}
+q_\pi (s, a) &amp; = E_\pi\left[G_t | S_t = s, A_t = a\right]\\
+ &amp; = E\left[R_{t+1} + \gamma q_\pi(S_{t+1}, A_{t+1}) | S_t = s, A_t = a\right]
+ \end{align}
+$$</span><br /></p>
+<p>We can see that Bellman equation is a linear equation. So if we know the value of <span class="math inline"><em>s</em><sub><em>t</em> + 1</sub></span>, we can easily calculate the value of <span class="math inline"><em>s</em><sub><em>t</em></sub></span>. This opens a lot of doors for iterative approaches for calculating the value for each state, since if we know the value of the next state, we can know the value of the current state.</p>
+<p>In the next post, we’ll be utilising the concepts of policies, states and actions to code our first RL agent. We’ll also see how Bellman equation is helpful in RL scenarios.</p>
+    </section>
+</article>
+
+    </main>
+
+    <!-- Footer -->
+
+    <footer id="footer" class="row">
+        Site proudly generated by
+        <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+        <div id="social">
+            <a href="https://github.com/nitinprakash96" title="github"><i class="fa fa-github-alt"></i></a>
+            &middot;
+            <a href="https://twitter.com/nitinprakash96" title="twitter"><i class="fa fa-twitter"></i></a>
+            &middot;
+            <a href="mailto:prakash.nitin63@gmail.com" title="email"><i class="fa fa-envelope"></i></a>
+        </div>
+    </footer>
+</body>
+
+<!--MathJax CDN-->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      messageStyle: "none"
+    });
+  
+    MathJax.Hub.Register.MessageHook('End Process', function() {
+      jQuery('#MathJax_Font_Test').empty();
+      jQuery('.MathJax_Display').parent('.math').addClass('mobile-math');
+    });
+  </script>
+  <script async="true" type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+  </script>
+
+</html>
