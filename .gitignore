@@ -2,3 +2,4 @@ _site
 _cache
 .stack
 .stack-work
+.DS_Store

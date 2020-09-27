@@ -49,3 +49,7 @@ Included is a compilation of my highlights from each book.
 -   [Shoe Dog](https://www.notion.so/Highlights-from-Phil-Knight-s-Show-Dog-1127c2abab0746339dbc80cd79482cf3)
 
 -   [1984](https://www.notion.so/1984-699fa0fb1ae44ad2b073145bbfae3aa2)
+
+-   [Atomic Habits](https://www.notion.so/Atomic-Habits-af9a61cdb05d4dddb7dfc4bbaa0eb754)
+
+-   [The Great Mental Models: Volume 1](https://www.notion.so/The-Great-Mental-Models-Volume-1-6ce68d793066489586735789658f2c65)
