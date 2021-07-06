@@ -15,9 +15,18 @@
 # The location of a snapshot can be provided as a file or url. Stack assumes
 # a snapshot provided as a file might change, whereas a url resource does not.
 #
+# First we have to tell Stack that we want to use this specific version of the
+# compiler rather than whatever is set in the resolver. Note that the actual
+# version number for GHC 9.0.1 RC1 is 9.0.0.20201227.
+
+# Normally Stack makes sure that the compiler version number matches up to the
+# minor (third) component. If we didn't tell Stack to match the compiler
+# version exactly, it would use GHC 9.0.1 if you had it installed.
+compiler-check: match-exact
+
 # resolver: ./custom-snapshot.yaml
 # resolver: https://example.com/snapshots/2018-01-01.yaml
-resolver: lts-16.15
+resolver: lts-16.31
 
 # User packages to be built.
 # Various formats can be used as shown in the example below.

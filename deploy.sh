@@ -1,6 +1,4 @@
-Follow the following commands to deploy a hakyll site with github pages.
 
-```
 # Temporarily store uncommited changes
 git stash
 
