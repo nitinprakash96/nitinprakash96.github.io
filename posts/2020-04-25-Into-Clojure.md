@@ -8,7 +8,7 @@ tags:       [clojure]
 ---
 
 ```
-Whatever you background, Clojure is almost guaranteed to affect 
+Whatever your background, Clojure is almost guaranteed to affect
 the way you think about programming.
 - Eli Bendersky
 ```
@@ -72,7 +72,7 @@ We'll look at some basic terms before diving deep into web programming.
 Creating and using functions, and creating functions that use functions, is what Clojure programers do. Clojure has a number of ways to create a function. I'll give an overview on some of them.
 
 ```clojure
-(def print-string 
+(def print-string
   (fn [] "That's cute. What else clojure is capable of?"))
 => #'user/print-string
 
@@ -200,9 +200,9 @@ user.core> (def foo '[1 2 3 4])
 user.core> foo
 => [1 2 3 4]
 
-;; An individual element can't be empty. 
-;; Only the whole data structure can be emtpty. 
-;; Therefore, when we talk about collections we 
+;; An individual element can't be empty.
+;; Only the whole data structure can be emtpty.
+;; Therefore, when we talk about collections we
 ;; are more so referring to the data structure as whole
 user.core> (empty? foo)
 => false
@@ -267,6 +267,6 @@ I'm not going to debate on what editor you should and should not use. But I high
 1. Emacs + cider
 2. IntelliJ + Cursive
 
-Both of the above are the most used development environment for clojure. I personally use spacemacs (an emacs flavour) for clojure development.
+Both of the above are the most used development environment for clojure. I personally use emacs for clojure development.
 
 In the next post we'll setup a web project and try to understand it's working.

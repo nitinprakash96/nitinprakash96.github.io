@@ -49,3 +49,21 @@ Included is a compilation of my highlights from each book.
 -   [Shoe Dog](https://www.notion.so/Highlights-from-Phil-Knight-s-Show-Dog-1127c2abab0746339dbc80cd79482cf3)
 
 -   [1984](https://www.notion.so/1984-699fa0fb1ae44ad2b073145bbfae3aa2)
+
+-   [Atomic Habits](https://www.notion.so/Atomic-Habits-af9a61cdb05d4dddb7dfc4bbaa0eb754)
+
+-   [The Great Mental Models: Volume 1](https://www.notion.so/The-Great-Mental-Models-Volume-1-6ce68d793066489586735789658f2c65)
+
+-   [The Psychology of Money](https://www.goodreads.com/book/show/41881472-the-psychology-of-money)
+
+-   [The Almanack of Naval Ravikant: A Guide to Wealth and Happiness](https://www.goodreads.com/book/show/54898389-the-almanack-of-naval-ravikant)
+
+-   [Haskell Programming From First Principles](https://www.goodreads.com/book/show/25587599-haskell-programming-from-first-principles)
+
+-   [Thinking with Types. Type-Level Programming in Haskell](https://www.goodreads.com/book/show/42736297-thinking-with-types-type-level-programming-in-haskell)
+
+-   [One Up On Wall Street](https://www.goodreads.com/book/show/762462.One_Up_On_Wall_Street)
+
+-   [The Good Parts of AWS](https://www.goodreads.com/book/show/49966180-the-good-parts-of-aws)
+
+-   [A Letter to a Hindu](https://www.goodreads.com/book/show/6682252-a-letter-to-a-hindu)
