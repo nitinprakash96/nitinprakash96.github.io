@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nitin Prakash</title>
+    <link rel="stylesheet" href="../css/default.css" />
+    <link rel="stylesheet" href="../css/syntax.css" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="../">Nitin Prakash</a>
+        </div>
+        <nav>
+            <a href="../blog.html">Blog</a>
+            <a href="../reading.html">Reading List</a>
+            <a href="../archive.html">Archive</a>
+        </nav>
+    </header>
+
+    <main role="main">
+        <article>
+    <section class="header">
+        Posted on October 20, 2021
+        
+            by Nitin Prakash
+        
+    </section>
+    <section>
+        <p>As a Haskell programmer, it’s quite natural to think about <em>type safety</em> almost always. Even when it comes to doing simplest of the things. There’s a whole bunch of debate on why dead simple database packages like <a href="https://github.com/haskellari/postgresql-simple">postgres-simple</a> or <a href="https://github.com/nurpax/sqlite-simple">sqlite-simple</a> should be avoided generally. The inlcination is towards libraries which offer more type safety (not to mention complexity comes along with it) like <a href="https://github.com/yesodweb/persistent">Persistent</a>. It offers a lot of features which guarantees type safety with SQL queries. Under the hood, it makes a ton of template haskell usage to produce a large amount of types and type classes to simplify serialization to and from the database. But the reality is, <code>persistent</code> is not as easy to use as <code>*-simple</code> libraries mentioned earlier. And it’s not always worth it to make things complex for a bit of type safety. If our use case is simple enough (and even in most of the code bases with heavy database usage, it really is) we can probably get away with writing plain SQL queries with enough type safety for things to not break at runtime.</p>
+<p>All that being said, it’s a nice idea to have type safe queries floating around in your codebase. Or you can do what I do, start with something simple and then iterate to make things better.</p>
+<p>The idea of this blog is the present a nice and concise way of writing SQL queries using Haskell without having to fight the type system unnecessarily. And these queries do not deviate a lot from writing standard SQL either.</p>
+<p>Let’s first create a new experimental table in an existing database schema. We’ll define a few data types based on top of this and carry on from there.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ot">{-# LANGUAGE OverloadedStrings  #-}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ot">{-# LANGUAGE QuasiQuotes        #-}</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="ot">{-# LANGUAGE TemplateHaskell    #-}</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="kw">import</span> <span class="dt">Database.SQLite.Simple</span> (<span class="dt">Connection</span> (..), execute_)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="kw">import</span> <span class="dt">Database.SQLite.Simple.QQ</span> (sql)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text</span> <span class="kw">as</span> <span class="dt">T</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a><span class="ot">createPersonTable ::</span> <span class="dt">Connection</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a>createPersonTable conn <span class="ot">=</span> execute_ conn [sql|</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a>    CREATE TABLE IF NOT EXISTS person</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a>        ( id           INTEGER  PRIMARY KEY AUTOINCREMENT</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a>        , name         TEXT     NOT NULL</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a>        , email        TEXT     UNIQUE NOT NULL</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a>        , phone_number TEXT     UNIQUE NOT NULL</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a>        , role         TEXT     NOT NULL</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a>        -- ^ This could even be an enum type at the DB layer</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a>        )</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a>    |]</span></code></pre></div>
+<p>This essentially captures some basic information of a person. The catch here would be to define <code>role</code> in our haskell code base as a sum type. The reasoning behind this is we don’t want random user roles to corrupt our database. We need to set a bound on the the values allowed on it. Once we have it, the real trouble is inserting and fetching the data itself. That is, navigation of data to and from the database.</p>
+<p>If we were to define data type <code>Person</code> which corresponds to the person table, it would look like:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text</span> <span class="kw">as</span> <span class="dt">T</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="kw">data</span> <span class="dt">Person</span> <span class="ot">=</span> <span class="dt">Person</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>    {<span class="ot"> pUUID      ::</span> <span class="op">!</span><span class="dt">Integer</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>    ,<span class="ot"> pName      ::</span> <span class="op">!</span><span class="dt">T.Text</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>    ,<span class="ot"> pEmail     ::</span> <span class="op">!</span><span class="dt">T.Text</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>    ,<span class="ot"> pRole      ::</span> <span class="op">!</span><span class="dt">Role</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>    ,<span class="ot"> pNumber    ::</span> <span class="op">!</span><span class="dt">T.Text</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>    } <span class="kw">deriving</span> stock (<span class="dt">Eq</span>, <span class="dt">Show</span>)</span></code></pre></div>
+<p>Note that the above is not going to compile just yet because we still need to go ahead and implement <code>Role</code> type. So let’s do that first.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="ot">{-# LANGUAGE LambdaCase #-}</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="co">-- We are going to limit to only 3 user roles</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a><span class="kw">data</span> <span class="dt">Role</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>    <span class="ot">=</span> <span class="dt">Hashira</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>    <span class="op">|</span> <span class="dt">Kakushi</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>    <span class="op">|</span> <span class="dt">DemonLord</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a>    <span class="kw">deriving</span> (<span class="dt">Eq</span>, <span class="dt">Show</span>, <span class="dt">Read</span>, <span class="dt">Enum</span>, <span class="dt">Bounded</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a><span class="ot">roleToText ::</span> <span class="dt">Role</span> <span class="ot">-&gt;</span> <span class="dt">T.Text</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true"></a>roleToText <span class="ot">=</span> \<span class="kw">case</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a>    <span class="dt">Hashira</span>    <span class="ot">-&gt;</span> <span class="st">&quot;hashira&quot;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true"></a>    <span class="dt">Kakushi</span>    <span class="ot">-&gt;</span> <span class="st">&quot;kakushi&quot;</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true"></a>    <span class="dt">DemondLord</span> <span class="ot">-&gt;</span> <span class="st">&quot;demon lord</span></span></code></pre></div>
+<p align="center">
+<img src="../images/6_post/rengoku.jpeg" style="width:350px;height:300px;">
+</p>
+<p>Cool! What now? Well, we’ve only setup the required data types that represent a person. We haven’t implemented anything that can let <code>person</code> communicate with the database itself. We need something (function, instance, miracle etc) in order to convert a <strong>sequence</strong> of fields (that we will fetch from the DB) to our haskell data type. Similary, we’ll need something to convert our haskell data type to a <strong>sequnce</strong> of fields that sqlite can understand while inserting data into the <code>person</code> table. Fortunately, <code>sqlite-simple</code> offers <code>FromRow</code> and <code>ToRow</code> typeclasses which is build exactly for this purpose!</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">import</span> <span class="dt">Control.Applicative</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="kw">import</span> <span class="dt">Database.SQLite.Simple.FromRow</span> (<span class="dt">FromRow</span> (..))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="kw">import</span> <span class="dt">Database.SQLite.Simple.Internal</span> (<span class="dt">Field</span> (..))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a><span class="kw">import</span> <span class="dt">Database.SQLite.Simple.ToRow</span> (<span class="dt">ToRow</span> (..))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a><span class="co">-- Why so many @field@ though?</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a><span class="co">-- According to the docs,</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a><span class="co">-- The number of calls to @field@ must match the number of fields returned</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a><span class="co">-- in a single row of the query result. Otherwise, a @ConversionFailed@</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a><span class="co">-- exception will be thrown.</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a><span class="kw">instance</span> <span class="dt">FromRow</span> <span class="dt">Person</span> <span class="kw">where</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true"></a>    fromRow <span class="ot">=</span> <span class="dt">Person</span> <span class="op">&lt;$&gt;</span> field <span class="op">&lt;*&gt;</span> field <span class="op">&lt;*&gt;</span> field <span class="op">&lt;*&gt;</span> field <span class="op">&lt;*&gt;</span> field</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true"></a><span class="co">-- We ignore pUUID as it is set to auto increment at the DB layer and is already</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true"></a><span class="co">-- managed by SQLite. Ideally, you should let UUIDs be handled at the DB layer</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true"></a><span class="co">-- itself unless you have a very strong reason not to</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true"></a><span class="kw">instance</span> <span class="dt">ToRow</span> <span class="dt">Person</span> <span class="kw">where</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true"></a>    toRow (<span class="dt">Person</span> _pUUID pName pEmail pRole pNumber) <span class="ot">=</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true"></a>        toRow (pName, pEmail, pRole, pNumber)</span></code></pre></div>
+<p>At this point, we should have an understanding of how data conversions are taking place between the code and database. Let’s write a function real quick to see if we are able insert and fetch a person or not.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="kw">import</span> <span class="dt">Database.SQLite.Simple</span> (<span class="dt">Connection</span> (..), <span class="dt">NamedParam</span> (..), executeNamed_, query_)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="ot">createNewPerson ::</span> <span class="dt">Connection</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a>createNewPerson conn <span class="ot">=</span> executeNamed conn [sql|</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>    INSERT INTO person</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a>        (name, email, phone_number, role)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a>    VALUES</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a>        (:name, :email, :phoneNumber, :userRole)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a>    |] [ <span class="st">&quot;:name&quot;</span>        <span class="op">:=</span> (<span class="st">&quot;Rengoku&quot;</span><span class="ot"> ::</span> <span class="dt">T.Text</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a>       , <span class="st">&quot;:phoneNumber&quot;</span> <span class="op">:=</span> (<span class="st">&quot;+91234567899&quot;</span><span class="ot"> ::</span> <span class="dt">T.Text</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a>       , <span class="st">&quot;:email&quot;</span>       <span class="op">:=</span> (<span class="st">&quot;rengoku@demonslayer.com&quot;</span><span class="ot"> ::</span> <span class="dt">T.Text</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true"></a>       , <span class="st">&quot;:userRole&quot;</span>    <span class="op">:=</span> <span class="dt">Hashira</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true"></a>       ]</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true"></a><span class="ot">getAllPerson ::</span> <span class="dt">Connection</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> [<span class="dt">Person</span>]</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true"></a>getAllPerson conn <span class="ot">=</span> query_ conn [sql|</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true"></a>    SELECT id</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true"></a>         , name</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true"></a>         , email</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true"></a>         , role</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true"></a>         , phone_number</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true"></a>      FROM person</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true"></a>|]</span></code></pre></div>
+<p align="center">
+<img src="../images/6_post/wtf-confused.gif" style="width:350px;height:300px;">
+</p>
+<p><code>getAllPerson</code> is very straight forward. But what in the name of sweet type classes is going on inside <code>createNewPerson</code> !?</p>
+<p>Let’s go step by step. There are 3 main components to the function:</p>
+<ul>
+<li><code>Connection</code> type in the type signature</li>
+<li>Named Parameters ( Weird looking equalities)</li>
+<li>Structure of the query itself</li>
+</ul>
+<p>And this is going to be the case for most of the queries you write which needs some sort of parameter substitution. At least, I’d recommend writing queries using named parameters in order to keep things clean and much more readable. We could’ve written <code>createNewPerson</code> without named parameters like so:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">import</span> <span class="dt">Database.SQLite.Simple</span> (execute)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="ot">createNewPerson ::</span> <span class="dt">Connection</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a>createNewPerson conn <span class="ot">=</span> execute conn [sql|</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a>    INSERT INTO person</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a>        (name, email, phone_number, role)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a>    VALUES</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true"></a>        (?, ?, ?, ?)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true"></a>    |] ( <span class="st">&quot;Rengoku&quot;</span><span class="ot"> ::</span> <span class="dt">T.Text</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true"></a>       , <span class="st">&quot;+91234567899&quot;</span><span class="ot"> ::</span> <span class="dt">T.Text</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true"></a>       , <span class="st">&quot;rengoku@demonslayer.com&quot;</span><span class="ot"> ::</span> <span class="dt">T.Text</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true"></a>       , <span class="dt">Hashira</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true"></a>       )</span></code></pre></div>
+<p>But the readability reduces as soon as the query grows and there are bunch of substitution happening. Also, there is a slight chance of messing up the order of the arguments (eg: type safety won’t save you if two consecute <code>Text</code> type substitutions are happening) leading to a corrupt DB state. Using named parameters remove these shortcomings.</p>
+<p>Alright enough talk, let’s actually see if this works or not. We’ll write a <code>main</code> method and fire up the repl to test and spam the code.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="kw">import</span> <span class="dt">Database.SQLite.Simple</span> (close, open)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a><span class="ot">flushPersonTable ::</span> <span class="dt">Connection</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a>flushPersonTable conn <span class="ot">=</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>    execute_ conn [sql|</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a>        DROP TABLE IF EXISTS person;</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a>    |]</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true"></a><span class="co">-- Drops the person table and creates a fresh new one</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true"></a><span class="co">-- This is done in order to play with fresh data every time we</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true"></a><span class="co">-- run @main@ in the repl. Not that it's a rule.</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true"></a><span class="ot">resetDb ::</span> <span class="dt">Connection</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true"></a>resetDb conn <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true"></a>    flushPersonTable conn</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true"></a>    createPersonTable conn</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true"></a>  <span class="co">-- Open up a connection to the database and this will be passed to each query we run.</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true"></a>  <span class="co">-- In practice, we should maintain a pool of connections so that we can run SQl</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true"></a>  <span class="co">-- queries in parallel. Also, this practice enables you to use queries inside a</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true"></a>  <span class="co">-- DB transaction.</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true"></a>  conn <span class="ot">&lt;-</span> open <span class="st">&quot;test.db&quot;</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true"></a>  resetDb conn</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true"></a>  createNewPerson conn</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true"></a>  rows <span class="ot">&lt;-</span> getAllPerson conn</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true"></a>  <span class="fu">mapM_</span> <span class="fu">print</span> rows</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true"></a>  close conn</span></code></pre></div>
+<p>Aw snap! We’ve run into errors. Out of all the things GHC is complaining, we focus ourselves on the following two first</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a> src<span class="op">/</span>SqliteSimple.hs<span class="op">:</span><span class="dv">54</span><span class="op">:</span><span class="dv">56</span><span class="op">:</span> <span class="fu">error</span><span class="op">:</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>    • <span class="dt">No</span> <span class="kw">instance</span> for (<span class="dt">FromField</span> <span class="dt">Role</span>) arising from a use <span class="kw">of</span> ‘field’</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>    • <span class="dt">In</span> the second argument <span class="kw">of</span> ‘(<span class="op">&lt;*&gt;</span>)’, namely ‘field’</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a>      <span class="dt">In</span> the first argument <span class="kw">of</span> ‘(<span class="op">&lt;*&gt;</span>)’, namely</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a>        ‘<span class="dt">Person</span> <span class="op">&lt;$&gt;</span> field <span class="op">&lt;*&gt;</span> field <span class="op">&lt;*&gt;</span> field <span class="op">&lt;*&gt;</span> field’</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a>      <span class="dt">In</span> the expression<span class="op">:</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true"></a>        <span class="dt">Person</span> <span class="op">&lt;$&gt;</span> field <span class="op">&lt;*&gt;</span> field <span class="op">&lt;*&gt;</span> field <span class="op">&lt;*&gt;</span> field <span class="op">&lt;*&gt;</span> field</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true"></a>   <span class="op">|</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true"></a><span class="dv">54</span> <span class="op">|</span>     fromRow <span class="ot">=</span> <span class="dt">Person</span> <span class="op">&lt;$&gt;</span> field <span class="op">&lt;*&gt;</span> field <span class="op">&lt;*&gt;</span> field <span class="op">&lt;*&gt;</span> field <span class="op">&lt;*&gt;</span> field</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true"></a>   <span class="op">|</span>                                                        <span class="op">^^^^^</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a>src<span class="op">/</span>SqliteSimple.hs<span class="op">:</span><span class="dv">58</span><span class="op">:</span><span class="dv">56</span><span class="op">:</span> <span class="fu">error</span><span class="op">:</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>    • <span class="dt">No</span> <span class="kw">instance</span> for (<span class="dt">ToField</span> <span class="dt">Role</span>) arising from a use <span class="kw">of</span> ‘toRow’</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a>    • <span class="dt">In</span> the expression<span class="op">:</span> toRow (pName, pEmail, pRole, pNumber)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a>      <span class="dt">In</span> an equation for ‘toRow’<span class="op">:</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a>          toRow (<span class="dt">Person</span> _pUUID pName pEmail pRole pNumber)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true"></a>            <span class="ot">=</span> toRow (pName, pEmail, pRole, pNumber)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true"></a>      <span class="dt">In</span> the <span class="kw">instance</span> declaration for ‘<span class="dt">ToRow</span> <span class="dt">Person</span>’</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true"></a>   <span class="op">|</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true"></a><span class="dv">58</span> <span class="op">|</span>     toRow (<span class="dt">Person</span> _pUUID pName pEmail pRole pNumber) <span class="ot">=</span> toRow (pName, pEmail, pRole, pNumber)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true"></a>   <span class="op">|</span>                                                        <span class="op">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span></span></code></pre></div>
+<p>Previously, we defined a <code>FromRow</code> and <code>ToRow</code> instance when we wanted to convert a <strong>collection</strong> of Haskell types to and from a <strong>collection</strong> of SQL types. But what happens when we introduce a new data type which is not understood by GHC natively. In our case, when we defined <code>Role</code>, we were good as GHC knew how to interpret sum types but it doesn’t know the intentions behind it’s usage. In other words, how we want <code>Role</code> to intereact with other data types (internally and from other packages) is left entirely to us. We <em>tell</em> GHC our intentions by impementing different instances for it. Therefore, we’ll have to define <code>ToField</code> and <code>FromField</code> instances so that the compiler knows how to convert <code>Role</code> to an SQL data type. Also, these implementations are used by <code>ToRow</code> and <code>FromRow</code>. What we had earlier was just a step in the right direction but it was incomplete.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="kw">import</span> <span class="dt">Database.SQLite.Simple.FromField</span> (<span class="dt">Field</span> (..), <span class="dt">FromField</span> (..), returnError)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a><span class="kw">import</span> <span class="dt">Database.SQLite.Simple.Ok</span> (<span class="dt">Ok</span> (..))</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a><span class="kw">import</span> <span class="dt">Database.SQLite.Simple.ToField</span> (<span class="dt">ToField</span> (..))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true"></a><span class="co">-- This prepares a value for substitution into a query string.</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true"></a><span class="kw">instance</span> <span class="dt">ToField</span> <span class="dt">Role</span> <span class="kw">where</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true"></a>    toField <span class="ot">=</span> <span class="dt">SQLText</span> <span class="op">.</span> roleToText</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true"></a><span class="kw">instance</span> <span class="dt">FromField</span> <span class="dt">Role</span> <span class="kw">where</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true"></a>    fromField (<span class="dt">Field</span> (<span class="dt">SQLText</span> <span class="st">&quot;hashira&quot;</span>) _) <span class="ot">=</span> <span class="dt">Ok</span> <span class="dt">Hahsira</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true"></a>    fromField (<span class="dt">Field</span> (<span class="dt">SQLText</span> <span class="st">&quot;kakushi&quot;</span>) _) <span class="ot">=</span> <span class="dt">Ok</span> <span class="dt">Kakushi</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true"></a>    fromField (<span class="dt">Field</span> (<span class="dt">SQLText</span> <span class="st">&quot;demon lord&quot;</span>) _) <span class="ot">=</span> <span class="dt">Ok</span> <span class="dt">DemonLord</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true"></a>    fromField f <span class="ot">=</span> returnError <span class="dt">ConversionFailed</span> f <span class="st">&quot;role does not exist&quot;</span></span></code></pre></div>
+<p>One of the question from above can be regarding the definition of <code>ToField</code> and <code>FromField</code> instances of <code>Role</code>. How did we come up with that? Well, the secret ingredient here is reading the docs. According to the <a href="https://hackage.haskell.org/package/sqlite-simple-0.4.18.0/docs/src/Database.SQLite.Simple.ToField.html#local-6989586621679115476">docs</a>, The way <code>ToField</code> is defined for <code>Text</code> types are:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="kw">instance</span> <span class="dt">ToField</span> <span class="dt">T.Text</span> <span class="kw">where</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a>    toField <span class="ot">=</span> <span class="dt">SQLText</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a>    <span class="ot">{-# INLINE toField #-}</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true"></a><span class="kw">instance</span> <span class="dt">FromField</span> <span class="dt">T.Text</span> <span class="kw">where</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true"></a>    fromField (<span class="dt">Field</span> (<span class="dt">SQLText</span> txt) _) <span class="ot">=</span> <span class="dt">Ok</span> txt</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true"></a>    fromField f <span class="ot">=</span> returnError <span class="dt">ConversionFailed</span> f <span class="st">&quot;need a text&quot;</span></span></code></pre></div>
+<p>It is quite clear from the above on how we can define our own version of <code>instance ToField Role</code> given that we want a <code>text</code> type in the database. If we try reloading our REPL now and run <code>main</code>, we can see that we have a successful transaction between Haskell layer and DB layer:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="op">*</span><span class="dt">SqliteSimple</span><span class="op">&gt;</span> main</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a><span class="dt">Person</span> {pUUID <span class="ot">=</span> <span class="dv">1</span>, pName <span class="ot">=</span> <span class="st">&quot;Rengoku&quot;</span>, pEmail <span class="ot">=</span> <span class="st">&quot;rengoku@demonslayer.com&quot;</span>, pRole <span class="ot">=</span> <span class="dt">Hashira</span>, pNumber <span class="ot">=</span> <span class="st">&quot;+91234567899&quot;</span>}</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a><span class="op">*</span><span class="dt">SqliteSimple</span><span class="op">&gt;</span></span></code></pre></div>
+<p>This was a high level tutorial on how to use <code>sqlite-simple</code> (or any database like <code>postgres-simple</code> and <code>mysql-simple</code>) for that matter. Note that <code>postgres-simple</code> does not ship named parameters natively. <a href="https://github.com/Holmusk/postgresql-simple-named">postgres-simple-named</a> would be a suitable chouce for that as it is built on top of <code>postgres-simple</code>. Anyways, we’ve only seen how to play with very basic data types. Let’s get a bit more creative. We can play with –</p>
+<ul>
+<li>timestamps</li>
+<li>Joins</li>
+<li>JSON structures</li>
+</ul>
+<p>to see the usefulness and ease of writing SQL queries with haskell.</p>
+<p>Let’s introduce a <code>created_at</code> value for a person. Let’s make the following changes,</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="kw">import</span> <span class="dt">Data.Time</span> (<span class="dt">UTCTime</span> (..))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a><span class="ot">createPersonTable ::</span> <span class="dt">Connection</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a>createPersonTable conn <span class="ot">=</span> execute_ conn [sql|</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true"></a>    CREATE TABLE IF NOT EXISTS person</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true"></a>        ( id           INTEGER  PRIMARY KEY AUTOINCREMENT</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true"></a>        , name         TEXT     NOT NULL</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true"></a>        , email        TEXT     UNIQUE NOT NULL</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true"></a>        , phone_number TEXT     UNIQUE NOT NULL</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true"></a>        , role         TEXT     NOT NULL -- This could even be an enum type at the DB layer</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true"></a>        -- Changed --</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true"></a>        , created_at   IMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true"></a>        ------------</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true"></a>        )</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true"></a>    |]</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true"></a><span class="kw">data</span> <span class="dt">Person</span> <span class="ot">=</span> <span class="dt">Person</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true"></a>    {<span class="ot"> pUUID      ::</span> <span class="op">!</span><span class="dt">Integer</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true"></a>    ,<span class="ot"> pName      ::</span> <span class="op">!</span><span class="dt">T.Text</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true"></a>    ,<span class="ot"> pEmail     ::</span> <span class="op">!</span><span class="dt">T.Text</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true"></a>    ,<span class="ot"> pRole      ::</span> <span class="op">!</span><span class="dt">Role</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true"></a>    ,<span class="ot"> pNumber    ::</span> <span class="op">!</span><span class="dt">T.Text</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true"></a>    <span class="co">-- Changed --</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true"></a>    ,<span class="ot"> pCreatedAt ::</span> <span class="op">!</span><span class="dt">UTCTime</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true"></a>    <span class="co">-------------</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true"></a>    } <span class="kw">deriving</span> stock (<span class="dt">Eq</span>, <span class="dt">Show</span>)</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true"></a></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true"></a><span class="co">-- Now we need to handle the added field in our instances</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true"></a><span class="co">-- Compiler will scream at you that certain fields are missing</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true"></a><span class="kw">instance</span> <span class="dt">FromRow</span> <span class="dt">Person</span> <span class="kw">where</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true"></a>    fromRow <span class="ot">=</span> <span class="dt">Person</span> <span class="op">&lt;$&gt;</span> field <span class="op">&lt;*&gt;</span> field <span class="op">&lt;*&gt;</span> field <span class="op">&lt;*&gt;</span> field <span class="op">&lt;*&gt;</span> field <span class="op">&lt;*&gt;</span> field</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true"></a></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true"></a><span class="co">-- when inserting a new person, ignore UUID and created_at (Handled by SQLite).</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true"></a><span class="kw">instance</span> <span class="dt">ToRow</span> <span class="dt">Person</span> <span class="kw">where</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true"></a>    toRow (<span class="dt">Person</span> _pUUID pName pEmail pRole pNumber _pJoinedAt) <span class="ot">=</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true"></a>        toRow (pName, pEmail, pRole, pNumber)</span></code></pre></div>
+<p>Now if we reload the REPL and run <code>main</code>, we get:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a><span class="op">*</span><span class="dt">SqliteSimple</span><span class="op">&gt;</span> <span class="op">:</span>r</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a>[<span class="dv">1</span> <span class="kw">of</span> <span class="dv">1</span>] <span class="dt">Compiling</span> <span class="dt">SqliteSimple</span>     ( src<span class="op">/</span>SqliteSimple.hs, interpreted )</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true"></a><span class="dt">Ok</span>, one <span class="kw">module</span> loaded<span class="op">.</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true"></a><span class="op">*</span><span class="dt">SqliteSimple</span><span class="op">&gt;</span> main</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true"></a><span class="dt">Person</span> {pUUID <span class="ot">=</span> <span class="dv">1</span>, pName <span class="ot">=</span> <span class="st">&quot;Rengoku&quot;</span>, pEmail <span class="ot">=</span> <span class="st">&quot;rengoku@demonslayer.com&quot;</span>, pRole <span class="ot">=</span> <span class="dt">Hashira</span>, pNumber <span class="ot">=</span> <span class="st">&quot;+91234567899&quot;</span>, pJoinedAt <span class="ot">=</span> <span class="dv">2021</span><span class="op">-</span><span class="dv">10</span><span class="op">-</span><span class="dv">25</span> <span class="dv">07</span><span class="op">:</span><span class="dv">21</span><span class="op">:</span><span class="dv">54</span> <span class="dt">UTC</span>}</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true"></a><span class="op">*</span><span class="dt">SqliteSimple</span><span class="op">&gt;</span></span></code></pre></div>
+<p>Notice the <code>pJoinedAt</code> at the end and the fact that we didn’t have to write a custom <code>FromField</code> instance for a timestamp value. That’s because <code>sqlite-simple</code> ships <code>instance FromField UTCTime</code> which gets imported while importing <code>FromField (..)</code>. This reasoning holds true even for other <code>Text</code> and <code>Int</code> types.</p>
+<p>Now let’s create another entity so we can experiment with SQL joins.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="co">-- A data type that represent the favourite anime and character of a user</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a><span class="kw">data</span> <span class="dt">FavouriteAnime</span> <span class="ot">=</span> <span class="dt">FavouriteAnime</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true"></a>    {<span class="ot"> faUUID               ::</span> <span class="op">!</span><span class="dt">Integer</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true"></a>    ,<span class="ot"> faAnimeName          ::</span> <span class="op">!</span><span class="dt">T.Text</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true"></a>    ,<span class="ot"> faFavouriteCharacter ::</span> <span class="op">!</span><span class="dt">T.Text</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true"></a>    ,<span class="ot"> faUserName           ::</span> <span class="op">!</span><span class="dt">T.Text</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true"></a>    } <span class="kw">deriving</span> (<span class="dt">Eq</span>, <span class="dt">Show</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true"></a><span class="kw">instance</span> <span class="dt">FromRow</span> <span class="dt">FavouriteAnime</span> <span class="kw">where</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true"></a>    fromRow <span class="ot">=</span> <span class="dt">FavouriteAnime</span> <span class="op">&lt;$&gt;</span> field <span class="op">&lt;*&gt;</span> field <span class="op">&lt;*&gt;</span> field <span class="op">&lt;*&gt;</span> field</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true"></a><span class="ot">createAnimeTable ::</span> <span class="dt">Connection</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true"></a>createAnimeTable conn <span class="ot">=</span> execute_ conn [sql|</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true"></a>    CREATE TABLE IF NOT EXISTS favourite_anime</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true"></a>        ( id                  INTEGER PRIMARY KEY AUTOINCREMENT</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true"></a>        , anime_name          TEXT    NOT NULL</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true"></a>        , favourite_character TEXT    UNIQUE</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true"></a>        , person_id           INTEGER NOT NULL</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true"></a>        -- We reference the person_id but we need to fetch the</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true"></a>        -- person name as per our Haskell data type</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true"></a>        , FOREIGN KEY(person_id) REFERENCES person(id)</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true"></a>        )</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true"></a>    |]</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true"></a></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true"></a><span class="ot">insertFavouriteAnime ::</span> <span class="dt">Connection</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true"></a>insertFavouriteAnime conn <span class="ot">=</span> executeNamed conn [sql|</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true"></a>    INSERT INTO favourite_anime</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true"></a>        (anime_name, favourite_character, person_id)</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true"></a>    VALUES</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true"></a>        (:animeName, :favouriteCharacter, :personId)</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true"></a>    |] [ <span class="st">&quot;:animeName&quot;</span>          <span class="op">:=</span> (<span class="st">&quot;Attack on titans&quot;</span><span class="ot"> ::</span> <span class="dt">T.Text</span>)</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true"></a>       , <span class="st">&quot;:favouriteCharacter&quot;</span> <span class="op">:=</span> (<span class="st">&quot;Levi Ackerman&quot;</span><span class="ot"> ::</span> <span class="dt">T.Text</span>)</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true"></a>       , <span class="st">&quot;:personId&quot;</span>           <span class="op">:=</span> (<span class="dv">1</span><span class="ot"> ::</span> <span class="dt">Int</span>)</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true"></a>       ]</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true"></a></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true"></a><span class="co">-- This example demonstrates just one LEFT JOIN for simplicity purposes.</span></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true"></a><span class="co">-- But, if you can write a plain SQL query in SQLite, you can write it here.</span></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true"></a><span class="co">-- So it can be as complicated as you want it to be.</span></span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true"></a><span class="co">-- RECOMMENDED: Keep things simple.</span></span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true"></a><span class="ot">getAllFavAnime ::</span> <span class="dt">Connection</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> [<span class="dt">FavouriteAnime</span>]</span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true"></a>getAllFavAnime conn <span class="ot">=</span> query_ conn [sql|</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true"></a>    SELECT fa.id</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true"></a>         , fa.anime_name</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true"></a>         , fa.favourite_character</span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true"></a>         , p.name</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true"></a>    FROM favourite_anime fa</span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true"></a>    LEFT JOIN person p ON p.id = fa.person_id</span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true"></a>    |]</span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true"></a></span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true"></a><span class="ot">flushAnimeTable ::</span> <span class="dt">Connection</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true"></a>flushAnimeTable conn <span class="ot">=</span></span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true"></a>    execute_ conn [sql|</span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true"></a>        DROP TABLE IF EXISTS favourite_anime;</span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true"></a>    |]</span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true"></a></span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true"></a><span class="co">-- And the corresponding changes to @resetDb@ and @main@</span></span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true"></a><span class="ot">resetDb ::</span> <span class="dt">Connection</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true"></a>resetDb conn <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true"></a>    <span class="co">-- drop all the tables</span></span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true"></a>    flushPersonTable conn</span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true"></a>    flushAnimeTable conn</span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true"></a></span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true"></a>    <span class="co">-- create fresh ones</span></span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true"></a>    createPersonTable conn</span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true"></a>    createAnimeTable conn</span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true"></a></span>
+<span id="cb15-68"><a href="#cb15-68" aria-hidden="true"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb15-69"><a href="#cb15-69" aria-hidden="true"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb15-70"><a href="#cb15-70" aria-hidden="true"></a>    conn <span class="ot">&lt;-</span> open <span class="st">&quot;test.db&quot;</span></span>
+<span id="cb15-71"><a href="#cb15-71" aria-hidden="true"></a>    resetDb conn</span>
+<span id="cb15-72"><a href="#cb15-72" aria-hidden="true"></a></span>
+<span id="cb15-73"><a href="#cb15-73" aria-hidden="true"></a>    createNewPerson conn</span>
+<span id="cb15-74"><a href="#cb15-74" aria-hidden="true"></a>    insertFavouriteAnime conn</span>
+<span id="cb15-75"><a href="#cb15-75" aria-hidden="true"></a></span>
+<span id="cb15-76"><a href="#cb15-76" aria-hidden="true"></a>    pRows <span class="ot">&lt;-</span> getAllPerson conn</span>
+<span id="cb15-77"><a href="#cb15-77" aria-hidden="true"></a>    faRows <span class="ot">&lt;-</span> getAllFavAnime conn</span>
+<span id="cb15-78"><a href="#cb15-78" aria-hidden="true"></a>    <span class="fu">mapM_</span> <span class="fu">print</span> pRows</span>
+<span id="cb15-79"><a href="#cb15-79" aria-hidden="true"></a>    <span class="fu">mapM_</span> <span class="fu">print</span> faRows</span>
+<span id="cb15-80"><a href="#cb15-80" aria-hidden="true"></a>    close conn</span></code></pre></div>
+<p align="center">
+<img src="../images/6_post/anime-nerd.png" style="width:350px;height:300px;">
+</p>
+<p>Let’s reload the REPL and run the <code>main</code> function,</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="op">*</span><span class="dt">SqliteSimple</span><span class="op">&gt;</span> <span class="op">:</span>r</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true"></a>[<span class="dv">1</span> <span class="kw">of</span> <span class="dv">1</span>] <span class="dt">Compiling</span> <span class="dt">SqliteSimple</span>     ( src<span class="op">/</span>SqliteSimple.hs, interpreted )</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true"></a><span class="dt">Ok</span>, one <span class="kw">module</span> loaded<span class="op">.</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true"></a><span class="op">*</span><span class="dt">SqliteSimple</span><span class="op">&gt;</span> main</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true"></a><span class="dt">Person</span> {pUUID <span class="ot">=</span> <span class="dv">1</span>, pName <span class="ot">=</span> <span class="st">&quot;Rengoku&quot;</span>, pEmail <span class="ot">=</span> <span class="st">&quot;rengoku@demonslayer.com&quot;</span>, pRole <span class="ot">=</span> <span class="dt">Hashira</span>, pNumber <span class="ot">=</span> <span class="st">&quot;+91234567899&quot;</span>, pJoinedAt <span class="ot">=</span> <span class="dv">2021</span><span class="op">-</span><span class="dv">10</span><span class="op">-</span><span class="dv">25</span> <span class="dv">10</span><span class="op">:</span><span class="dv">46</span><span class="op">:</span><span class="dv">47</span> <span class="dt">UTC</span>}</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true"></a><span class="dt">FavouriteAnime</span> {faUUID <span class="ot">=</span> <span class="dv">1</span>, faAnimeName <span class="ot">=</span> <span class="st">&quot;Attack on titans&quot;</span>, faFavouriteCharacter <span class="ot">=</span> <span class="st">&quot;Levi Ackerman&quot;</span>, faUserName <span class="ot">=</span> <span class="st">&quot;Rengoku&quot;</span>}</span></code></pre></div>
+<p>Just as expected!! These are just some basic stuff I wanted to write about. These can surely be extended to do a lot of complicated stuff as well if it fits the relational data model. So feel free to experiment as much as you want.</p>
+<p>One concern now is that these queries are unsafe in nature. These will result into runtime errors and we want to avoid that. One of the ways of doing that is to wrap the queries provided by <code>sqlite-simple</code> into some <code>Maybe</code> or <code>Either</code> types to catch these kind of errors when running tests.</p>
+<p>p.s. Always write tests.</p>
+    </section>
+</article>
+
+    </main>
+
+    <!-- Footer -->
+
+    <footer id="footer" class="row">
+        Site proudly generated by
+        <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+        <div id="social">
+            <a href="https://github.com/nitinprakash96" title="github"><i class="fa fa-github-alt"></i></a>
+            &middot;
+            <a href="https://twitter.com/nitinprakash96" title="twitter"><i class="fa fa-twitter"></i></a>
+            &middot;
+            <a href="mailto:prakash.nitin63@gmail.com" title="email"><i class="fa fa-envelope"></i></a>
+        </div>
+    </footer>
+</body>
+
+<!--MathJax CDN-->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      messageStyle: "none"
+    });
+  
+    MathJax.Hub.Register.MessageHook('End Process', function() {
+      jQuery('#MathJax_Font_Test').empty();
+      jQuery('.MathJax_Display').parent('.math').addClass('mobile-math');
+    });
+  </script>
+  <script async="true" type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+  </script>
+
+</html>

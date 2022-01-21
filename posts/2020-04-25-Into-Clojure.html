@@ -33,7 +33,7 @@
         
     </section>
     <section>
-        <pre><code>Whatever you background, Clojure is almost guaranteed to affect 
+        <pre><code>Whatever your background, Clojure is almost guaranteed to affect
 the way you think about programming.
 - Eli Bendersky</code></pre>
 <p>I’ve been meaning to start a series on Clojure for quite a while now. I started exploring functional programming around June, 2019 and stumbled upon this language. I sure had my doubts on how impactful it might be. However, I was quite shocked with the pleasant development experience. The elegant integration with emacs and the joy of using REPL are all something that keeps me enganged in exploring clojure more and more everyday. I can keep going but first, let’s dig into the background of Clojure so that we don’t get lost right at the beginning.</p>
@@ -73,7 +73,7 @@ is not worth knowing.
 <p>We’ll look at some basic terms before diving deep into web programming.</p>
 <h3 id="functions">Functions</h3>
 <p>Creating and using functions, and creating functions that use functions, is what Clojure programers do. Clojure has a number of ways to create a function. I’ll give an overview on some of them.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>(<span class="bu">def</span><span class="fu"> print-string </span></span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>(<span class="bu">def</span><span class="fu"> print-string</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>  (<span class="kw">fn</span> [] <span class="st">&quot;That's cute. What else clojure is capable of?&quot;</span>))</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>=&gt; <span class="va">#'user/print-string</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a></span>
@@ -160,9 +160,9 @@ is not worth knowing.
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a>user.core&gt; foo</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a>=&gt; [<span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span>]</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true"></a><span class="co">;; An individual element can't be empty. </span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true"></a><span class="co">;; Only the whole data structure can be emtpty. </span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true"></a><span class="co">;; Therefore, when we talk about collections we </span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true"></a><span class="co">;; An individual element can't be empty.</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true"></a><span class="co">;; Only the whole data structure can be emtpty.</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true"></a><span class="co">;; Therefore, when we talk about collections we</span></span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true"></a><span class="co">;; are more so referring to the data structure as whole</span></span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true"></a>user.core&gt; (<span class="kw">empty?</span> foo)</span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true"></a>=&gt; <span class="va">false</span></span></code></pre></div>
@@ -204,7 +204,7 @@ is not worth knowing.
 <li>Emacs + cider</li>
 <li>IntelliJ + Cursive</li>
 </ol>
-<p>Both of the above are the most used development environment for clojure. I personally use spacemacs (an emacs flavour) for clojure development.</p>
+<p>Both of the above are the most used development environment for clojure. I personally use emacs for clojure development.</p>
 <p>In the next post we’ll setup a web project and try to understand it’s working.</p>
     </section>
 </article>
