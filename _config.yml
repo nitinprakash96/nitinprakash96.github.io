@@ -1,0 +1,36 @@
+# Site settings
+title:          Nitin
+description:    "Personal blog"
+url:            "https://thenitinprakash.com"
+
+
+# Author
+author:
+  name:         Nitin Prakash
+  url:          https://thenitinprakash.com
+  email:        me@thenitinprakash.com
+
+# Build settings
+markdown:       kramdown
+include:
+  - _pages
+
+# Assets
+sass:
+  sass_dir:     _sass
+  style:        compressed
+
+# Gems
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+  - jekyll-seo-tag
+  # - jemoji #Uncomment this to allow emoji in your post
+
+# Permalinks
+permalink:      /:year-:month-:day/:title
+paginate:       8
+
+# Excludes
+exclude: [ Gemfile, Gemfile.lock, tale.gemspec ]
+

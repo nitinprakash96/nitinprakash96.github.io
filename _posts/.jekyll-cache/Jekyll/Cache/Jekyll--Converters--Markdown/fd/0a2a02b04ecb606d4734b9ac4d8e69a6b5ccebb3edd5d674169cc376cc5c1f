@@ -1,0 +1,257 @@
+I"2V<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Whatever your background, Clojure is almost guaranteed to affect
+the way you think about programming.
+- Eli Bendersky
+</code></pre></div></div>
+
+<p>I’ve been meaning to start a series on Clojure for quite a while now. I started exploring functional programming around June, 2019 and stumbled upon this language. I sure had my doubts on how impactful it might be. However, I was quite shocked with the pleasant development experience. The elegant integration with emacs and the joy of using REPL are all something that keeps me enganged in exploring clojure more and more everyday. I can keep going but first, let’s dig into the background of Clojure so that we don’t get lost right at the beginning.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A language that doesn't affect the way you think about programming,
+is not worth knowing.
+
+- Alan Perlis
+</code></pre></div></div>
+
+<h3 id="what-is-clojure">What is clojure?</h3>
+
+<ul>
+  <li>A functional programming language.</li>
+  <li>A complied language. Yet dynamic in nature i.e., clojure features are also supported at runtime.</li>
+  <li>Values built-in data structure philosphy. That is, it provides built-in support for <em>map</em>, <em>vector</em>, <em>hash-map</em>, <em>list</em> etc.</li>
+  <li>Provides persitent data structures that essentially focuses on immutability and multi-threading.</li>
+  <li>Shares <em>code as data</em> philosphy with a macro system.</li>
+</ul>
+
+<p>For those of you who know, it’s a LISP! Don’t get confused now. Being a lisp does not mean it can’t be used to build production ready softwares. It’s fairly important to understand that clojure comes with a lot of features alongside being a lisp.</p>
+
+<p align="center">
+  <img src="/images/2020-04-25-clojure_intro.jpg" />
+</p>
+
+<p>Having said that, clojure provides a very powerful support for interfaces. These interfaces are called <em>protocols</em> and discourages thinking in terms of classes with inheritance. It supports <em>multiple dispatch</em> functions as well. Clojure also provides a great support for concurrency and parallelism in multiple ways.</p>
+
+<h3 id="code-as-data">Code as data</h3>
+
+<p>Let’s consider the follwing block of code. By the looks of it, anyone can say that it takes two arguments, <em>x</em> and <em>y</em> and returns the addition of the two.</p>
+
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">add</span><span class="w">
+  </span><span class="p">[</span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">+</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Hold your horses. Let’s take a close look and try to understand the way it can be interpreted. In the above code,</p>
+
+<ul>
+  <li><em>x</em> and <em>y</em> are <strong>symbols</strong>. A symbol is basically an object representing a name. These are first class names in Clojure.</li>
+  <li>[x y] is a vector containing the symbols.</li>
+  <li>(+ x y) is a linked list data structure containing two symbols <em>x</em> and <em>y</em>.</li>
+</ul>
+
+<p>From the above, I want to infer that when we talk about any piece of clojure code,</p>
+<ul>
+  <li>We talk about a code that will execute.</li>
+  <li>We think of it as a data structure consisting of <em>vectors</em>, <em>maps</em>, <em>intergers</em>, <em>strings</em> etc.</li>
+</ul>
+
+<p>In computer programming, this is called <a href="https://en.wikipedia.org/wiki/Homoiconicity">Homoiconicity</a>. Clojure is said to be homoiconic. In simple terms, it is said to share <em>code as data</em> philosphy. Code forms are data structures and data structures can be thought of as forms and executed as code.</p>
+
+<p align="center">
+  <img src="/images/2020-04-25-code_as_data.jpg" style="width:350px;height:300px;" />
+</p>
+
+<p>We’ll look at some basic terms before diving deep into web programming.</p>
+
+<h3 id="functions">Functions</h3>
+
+<p>Creating and using functions, and creating functions that use functions, is what Clojure programers do. Clojure has a number of ways to create a function. I’ll give an overview on some of them.</p>
+
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">print-string</span><span class="w">
+  </span><span class="p">(</span><span class="k">fn</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="s">"That's cute. What else clojure is capable of?"</span><span class="p">))</span><span class="w">
+</span><span class="n">=&gt;</span><span class="w"> </span><span class="o">#</span><span class="ss">'user/print-string</span><span class="w">
+
+</span><span class="p">(</span><span class="nf">print-string</span><span class="p">)</span><span class="w">
+</span><span class="n">=&gt;</span><span class="w"> </span><span class="s">"That's cute. What else clojure is capable of?"</span><span class="w">
+</span></code></pre></div></div>
+
+<p><em>def</em> is used declare a variable. <em>fn</em> creates a simple function object. It can be stored in a var, passed to functions etc.
+<em>defn</em> is a macro that makes defining functions a little bit simpler. The above can be written as:</p>
+
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">print-string</span><span class="w">
+        </span><span class="p">[]</span><span class="w">
+        </span><span class="s">"That's cute. What else clojure is capable of?"</span><span class="p">)</span><span class="w">
+</span><span class="n">=&gt;</span><span class="w"> </span><span class="o">#</span><span class="ss">'user/print-string</span><span class="w">
+
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">print-string</span><span class="p">)</span><span class="w">
+</span><span class="n">=&gt;</span><span class="w"> </span><span class="s">"That's cute. What else clojure is capable of?"</span><span class="w">
+</span></code></pre></div></div>
+
+<p>We can also overload arity in a single function, self-reference it.</p>
+
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">sum</span><span class="w">
+        </span><span class="p">([</span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w">
+        </span><span class="p">([</span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nb">+</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="p">))</span><span class="w">
+        </span><span class="p">([</span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nb">+</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="p">)))</span><span class="w">
+</span><span class="n">=&gt;</span><span class="w"> </span><span class="o">#</span><span class="ss">'user/sum</span><span class="w">
+
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">sum</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">
+</span><span class="mi">1</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">sum</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">
+</span><span class="mi">3</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">sum</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w">
+</span><span class="mi">7</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="repl">REPL</h3>
+
+<p>This stands for <em>Read-Eval-Print-Loop</em>. The REPL reads in text through the reader and further transforms it into a Clojure data structure. We can imagine REPL as our playground where we can test running code or even try out new ideas.</p>
+
+<p>The reason it is such a fantastic feature is because of the feedback loop which tremendously enhances development cycle. This kind of feature is not available for most languages. We’ll see the power of REPL in further sections. You can also read more about REPL <a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">here</a>.</p>
+
+<h3 id="pure-functions">Pure functions</h3>
+
+<p>These are functions that will always produce the same result for a given input. These cannot have any observable side effects and don’t depend on any kind of outside state, other than that which was given as arguments to the function. The result of such functions don’t change during the execution of the program or between executions of the program, as the dependency on outside state can lead to changes in the result of the function.</p>
+
+<blockquote>
+  <p>Side effects are observed application state change outside a function</p>
+</blockquote>
+
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">product</span><span class="w">
+        </span><span class="p">[</span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nb">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="p">))</span><span class="w">
+</span><span class="n">=&gt;</span><span class="w"> </span><span class="o">#</span><span class="ss">'user/sum</span><span class="w">
+
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">product</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">
+</span><span class="mi">2</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The above function <em>product</em> will always result the same for a fixed <em>x</em> and <em>y</em>. Even the examples above where we discussed multi arity were pure functions.</p>
+
+<p>But,</p>
+
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">principal</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span><span class="w">
+</span><span class="n">=&gt;</span><span class="w"> </span><span class="o">#</span><span class="ss">'user/amount</span><span class="w">
+
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">interest</span><span class="w">
+        </span><span class="p">[</span><span class="nb">time</span><span class="w"> </span><span class="n">rate</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nb">/</span><span class="w"> </span><span class="p">(</span><span class="nb">*</span><span class="w"> </span><span class="n">principal</span><span class="w"> </span><span class="nb">time</span><span class="w"> </span><span class="n">rate</span><span class="p">)</span><span class="w"> </span><span class="mi">100</span><span class="p">))</span><span class="w">
+</span><span class="n">=&gt;</span><span class="w"> </span><span class="o">#</span><span class="ss">'user/interest</span><span class="w">
+
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">interest</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w">
+</span><span class="n">=&gt;</span><span class="w"> </span><span class="mi">50000</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The above function <em>interest</em> is not a pure function as it depends on a variable <em>principal</em>. If it changed, <em>interest</em> would produce a different result for the same <em>time</em> and <em>rate</em>. These are called <strong>impure functions</strong>.</p>
+
+<h3 id="keywords">Keywords</h3>
+
+<p>According to Clojure documentation, <em>keywords</em> can be described as symbols that evaluate to themeselves.</p>
+
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="no">:foobar</span><span class="w">
+</span><span class="n">=&gt;</span><span class="w"> </span><span class="no">:foobar</span><span class="w">
+
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">keyword?</span><span class="w"> </span><span class="no">:foorbar</span><span class="p">)</span><span class="w">
+</span><span class="n">=&gt;</span><span class="w"> </span><span class="n">true</span><span class="w">
+
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">keyword</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w">
+</span><span class="n">=&gt;</span><span class="w"> </span><span class="n">nil</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Don’t worry about the functioning of <code class="language-plaintext highlighter-rouge">keyword?</code> right now. You can perhaps go through <a href="https://clojure.org/api/cheatsheet">cheatsheet</a> that has various built-in functions listed categorically. What I would like you to understand is that keywords provide a very fast equality test. And also these are the keys of a hashmap in clojure.</p>
+
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">sample-map</span><span class="w"> </span><span class="p">{</span><span class="no">:a</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="no">:b</span><span class="w"> </span><span class="mi">2</span><span class="p">})</span><span class="w">
+</span><span class="n">=&gt;</span><span class="w"> </span><span class="o">#</span><span class="ss">'user/sample-map</span><span class="w">
+
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="n">sample-map</span><span class="w">
+</span><span class="n">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="no">:a</span><span class="w"> </span><span class="mi">1</span><span class="n">,</span><span class="w"> </span><span class="no">:b</span><span class="w"> </span><span class="mi">2</span><span class="p">}</span><span class="w">
+
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="no">:a</span><span class="w"> </span><span class="n">sample-map</span><span class="p">)</span><span class="w">
+</span><span class="n">=&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="collections-and-sequences">Collections and Sequences</h3>
+
+<p>There a lot of operations over collections and sequences provided by clojure. But before diving into those operation, we need to understand the difference between a <em>sequence</em> abstraction and a <em>collection</em> abstraction.</p>
+
+<blockquote>
+  <p>Every sequence is a collection, but not every collection is a sequence.</p>
+</blockquote>
+
+<p align="center">
+  <img src="/images/2020-04-25-seq_vs_coll.jpg" style="width:350px;height:300px;" />
+</p>
+
+<p>The collection abstraction is closely related to the sequence abstraction. All of Clojure’s core data structures — vectors, maps, lists and sets — take part in both abstractions. The main difference is that <em>sequence</em> is about operating on the <em>individual element</em> that is expected to be accessed in linear fashion whereas <em>collection</em> is more about the overall data structure.</p>
+
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user.core&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="p">])</span><span class="w">
+</span><span class="n">=&gt;</span><span class="w"> </span><span class="o">#</span><span class="ss">'user/foo</span><span class="w">
+</span><span class="n">user.core&gt;</span><span class="w"> </span><span class="n">foo</span><span class="w">
+</span><span class="n">=&gt;</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span><span class="w">
+
+</span><span class="c1">;; An individual element can't be empty.</span><span class="w">
+</span><span class="c1">;; Only the whole data structure can be emtpty.</span><span class="w">
+</span><span class="c1">;; Therefore, when we talk about collections we</span><span class="w">
+</span><span class="c1">;; are more so referring to the data structure as whole</span><span class="w">
+</span><span class="n">user.core&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">empty?</span><span class="w"> </span><span class="n">foo</span><span class="p">)</span><span class="w">
+</span><span class="n">=&gt;</span><span class="w"> </span><span class="n">false</span><span class="w">
+</span></code></pre></div></div>
+
+<p><a href="https://stackoverflow.com/a/22439707/6244324">This stackoverflow answer</a> can be helpful in getting the overview easily.</p>
+
+<h3 id="starting-a-simple-project">Starting a simple project</h3>
+
+<p>This section focuses on generating an outline for a simple clojure project (not for web programming). We will use <a href="https://leiningen.org/">Leiningen</a> as our tool to automate any sort of clojure project throughout the series. There are others such as <em>boot</em> but we will focus on <em>lein</em>.</p>
+
+<p>To generate a project skeleton, a simple <em>lein</em> command can do the trick:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lein new app clojure-first
+</code></pre></div></div>
+
+<p>This should genetate a structure as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── CHANGELOG.md
+├── LICENSE
+├── README.md
+├── doc
+│   └── intro.md
+├── project.clj
+├── resources
+├── src
+│   └── clojure_first
+│       └── core.clj
+├── target
+└── test
+    └── clojure_first
+        └── core_test.clj
+</code></pre></div></div>
+
+<p>To run the project,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lein run
+</code></pre></div></div>
+
+<p>This command successfully runs because there is a <code class="language-plaintext highlighter-rouge">-main</code> function in <code class="language-plaintext highlighter-rouge">src/clojure_first/core.clj</code> which is the entry point for the app. Remove that and you might end up setting your hair on fire. Well, to ensure that doesn’t happend we depend on lein.</p>
+
+<p>To try out repl, you can run</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lein repl
+</code></pre></div></div>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>In this post we figured out:</p>
+
+<ol>
+  <li>What is clojure?</li>
+  <li>Clojure philosphy.</li>
+  <li>Basic terms related to clojure.</li>
+  <li>Starting a simple clojure project.</li>
+</ol>
+
+<p>I’m not going to debate on what editor you should and should not use. But I highly recommend one of the follwing:</p>
+
+<ol>
+  <li>Emacs + cider</li>
+  <li>IntelliJ + Cursive</li>
+</ol>
+
+<p>Both of the above are the most used development environment for clojure. I personally use emacs for clojure development.</p>
+
+<p>In the next post we’ll setup a web project and try to understand it’s working.</p>
+:ET
