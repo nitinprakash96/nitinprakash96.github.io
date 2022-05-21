@@ -74,7 +74,7 @@ According to Hume, there are two possible arguments we can make:
 2. A probable argument: would be circular. Circular here means that
 the argument uses an inductive principle to justify an inductive
 principle. While justification of one inductive principle in terms of
-another makes sense, but ultimately there will be (or needs to be) an
+another is fine, but ultimately there will be (or needs to be) an
 inductive principle for which we can supply no non-circular
 justification.
 
@@ -84,12 +84,12 @@ experience.
 
 But Hume is just one person, right? Maybe he was just insane to
 question something that has been a reliable method for proving
-theories for centuries.  Well, maybe not. In __The Logic of Scientific
+theories for centuries.  Or, maybe not. In __The Logic of Scientific
 Discovery (LSD)__, Karl Popper held that induction has no place in the
 logic of science. Science, in his view (and many others), is a
 deductive process. Popper's theory has been criticized a lot by folks
 who know a lot more than me. But it's hard to deny his theory as
-_deriving_ results from experience barely gets us closer to the
+_deriving results from experience_ barely gets us closer to the
 scientific truth. Scientists formulate hypotheses and theories that is
 put to test by deriving particular observable consequences.
 
@@ -101,15 +101,24 @@ long run. Or brutally speaking, theory becomes useless. In Brief
 history of Time, Hawking mentions that any thoery is valid until
 something new comes along and proves it wrong. If that happens, we
 need to start over. Ultimate goal, remaining the same i.e., build
-explainations and testable arguments for a theory.
+explainations and testable arguments for a theory. Inductivism fails
+to accomplish this very goal. There's simply no scientific explanation
+for any part of the premise.
 
-Like I explained earlier, all inductive inferences have a contingent nature attached to them. A
-direct consequence of this characteristic is the error risk
-associated. The degree of the risk may vary from premise to premise.
-A very brilliant example in my opinion is https://math.stackexchange.com/a/1204311/479722
-Or lets take another for example. Claim 3 in https://brilliant.org/wiki/flawed-induction-proofs/
+Like I explained earlier, all inductive inferences have a contingent
+nature attached to them. A direct consequence of this characteristic
+is the error risk associated. The degree of the risk may vary from
+premise to premise.  A very good example in my opinion is
+[this proof of an identity given by Ramanujan](https://math.stackexchange.com/a/1204311/479722).
 
-
-Inductive inference is not and could not be reasoning, either
-deductive or probabilistic, from premises to conclusion, so we must
-look elsewhere to understand the conclusion to an argument.
+With all that being said, it's still hard to completely get rid of
+inductive reasoning. Though we are now questioning the reliability of
+any inductive method we chose. Let's say we have to derive a
+conclusion about an event __E__ based on prior __Es__. We will need to
+consider that the inductive method __I__ being used __will__ contain
+certain expected error on new cases. We should look for an __I__ with
+the least expected error, given enough data. Then again, I'm not
+saying you've reached a final _true_ conclusion. You've mught've just
+reached a bit closer to it. Or gotten it completely wrong since it's
+just deriving from experience and has no testable arguments
+associated.
