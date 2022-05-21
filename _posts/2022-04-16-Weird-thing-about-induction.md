@@ -17,12 +17,35 @@ __Principal of Induction__ is based upon.
 
 > The future shall resemble the past
 
-Indictivism's two most serious misconceptions:
+The problem arises within the realm of induction when we start using
+inductive rules in place of deductive rules. We often end up thinking
+using them interchangeably. The difference between both is the fact
+that any valid deductive rule is _necessarily_ truth preserving, while
+inductive rules are not. In other words, a valid deductive rule cannot
+lead from a true premise to a false conculsion while an inductive rule
+might.
+
+Let's take an example. If someone we know reads a lot and recommends a
+book, we may assume that means we _might_ enjoy the book. This has two
+components to it:
+1. We _assume_ that they read a lot. This is subjective. If you read
+10 pages of a book a day and your friend 20, then they read a lot. But
+if someone else you know reads 50 pages then your friend doesn't read
+a lot. There's a bit of ambiguity attached to this assumption.
+2. The conclusion isn't necessarily true. We _might_ or _might not_
+enjoy the recommended book. So the conclusion has some percentage of
+_probabilty_ attached to it.
+
+That should present an idea behind the flaws of inductive reasoning.
+And why, if assumed to be reliable, it won't lead us to truth.  Now
+back to inductivism.
+
+Inductivism's two most serious misconceptions:
 
 1. Inductivism purports to explain to how science obtains _predictions
 about experiences_. Just how? Eg: Astrophysics completely annhilites
-this concept.  Most of the laws of physics that primarily concern
-stars, their existance or their composition have never been observed
+this concept. Most of the laws of physics that primarily concern
+stars, their existence or their composition have never been observed
 before. Or take any chemical reactions for that matter. The amount of
 surprises that take place while mixing two compounds cannot be based
 on the principal of induction.
@@ -48,7 +71,12 @@ conclusion of an inductive inference.
 
 According to Hume, there are two possible arguments we can make:
 1. A demonstrative argument: produces the wrong kind of conclusion.
-2. A probable argument: would be circular.
+2. A probable argument: would be circular. Circular here means that
+the argument uses an inductive principle to justify an inductive
+principle. While justification of one inductive principle in terms of
+another makes sense, but ultimately there will be (or needs to be) an
+inductive principle for which we can supply no non-circular
+justification.
 
 Therefore, for Hume, the problem remains of how to explain why we form
 any conclusions that go beyond the past instances of which we have had
@@ -59,14 +87,28 @@ question something that has been a reliable method for proving
 theories for centuries.  Well, maybe not. In __The Logic of Scientific
 Discovery (LSD)__, Karl Popper held that induction has no place in the
 logic of science. Science, in his view (and many others), is a
-deductive process. Scientists formulate hypotheses and theories that
-is put to test by deriving particular observable consequences.
+deductive process. Popper's theory has been criticized a lot by folks
+who know a lot more than me. But it's hard to deny his theory as
+_deriving_ results from experience barely gets us closer to the
+scientific truth. Scientists formulate hypotheses and theories that is
+put to test by deriving particular observable consequences.
 
 And it's very much necessary. One of the conditions for anything to be
 scientifically valid is that a theory needs to be testable. If an
 experiment cannot be tested on the grounds of some explanation or
 expectation then it has the potential of not sustaining itself in the
-long run. Or brutally speaking, it is useless.
+long run. Or brutally speaking, theory becomes useless. In Brief
+history of Time, Hawking mentions that any thoery is valid until
+something new comes along and proves it wrong. If that happens, we
+need to start over. Ultimate goal, remaining the same i.e., build
+explainations and testable arguments for a theory.
+
+Like I explained earlier, all inductive inferences have a contingent nature attached to them. A
+direct consequence of this characteristic is the error risk
+associated. The degree of the risk may vary from premise to premise.
+A very brilliant example in my opinion is https://math.stackexchange.com/a/1204311/479722
+Or lets take another for example. Claim 3 in https://brilliant.org/wiki/flawed-induction-proofs/
+
 
 Inductive inference is not and could not be reasoning, either
 deductive or probabilistic, from premises to conclusion, so we must
