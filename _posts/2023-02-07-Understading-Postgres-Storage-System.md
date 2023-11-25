@@ -20,12 +20,12 @@ collection of 3 design principles:
 - Provide transaction management without the necessity of writing a
  large amount of specialized crash recovery code. Why? Because it's
  hard to write safe code this way and hard to debug consequently.
-- Accomodate the historical state of the data base on a
+- Accomodate the historical state of the data based on a
 write-once-read-many (WORM) optical disk (or other archival medium) in
 addition to the current state on an ordinary magnetic disk. This was
 the birth of __Vacuum cleaner__.
-- Hardware is a resource. The storage system can take advantage
-  ofexistence of non-volatile main memory in some reasonable quantity.
+- Hardware is a _resource_. The storage system can take advantage
+of existence of non-volatile main memory in some reasonable quantity.
 
 Before diving into the above principles in detail, lets see how the
 transaction system works in postgres.
@@ -34,7 +34,7 @@ transaction system works in postgres.
 
 - Transactions can be thought of as unique identifiers for postgres
   operations.
-- Each transaction used to be a 40 bit unsigned integer that are
+- Each transaction is a 40 bit unsigned integer that are
   sequentially assigned starting at 1 and increments for each new
   transaction. These integers are called __Transaction identifier
   (XID)__. However, modern Postgres uses 32 bit unsigned integers.
@@ -60,7 +60,7 @@ Per row metadata:
 ---------------------- | -------------------------------------------: |
 | OID   | a system-assigned unique record identifier |
 | X<sub>min</sub> | transaction identifier of the interaction inserting the record |
-| T<sub>min</sub> | commit time of X<sub>Min</sub> (whenthe record became valid) |
+| T<sub>min</sub> | commit time of X<sub>Min</sub> (when the record became valid) |
 | C<sub>min</sub> | command identifier of the interaction inserting the record |
 | X<sub>max</sub> | transaction identifier of the interaction deleting the record |
 | T<sub>max</sub> | commit time of X<sub>max</sub> (when the record stopped being valid) |
@@ -70,7 +70,7 @@ Per row metadata:
 <br>
 
 The current row per metadata can be found
-[here](https://www.postgresql.org/docs/14/storage-page-layout.html#STORAGE-TUPLE-LAYOUT)
+[here](https://www.postgresql.org/docs/16/storage-page-layout.html#STORAGE-TUPLE-LAYOUT)
 
 1. `INSERT`: Fields OID, X<sub>min</sub> and C<sub>min</sub> were
    set. Rest of the fields were left blank.
@@ -149,7 +149,7 @@ I won't go into depth. Feel free to read the paper.
 
 ### Vacuuming the disk
 
-An asynchronous demon (called **vacuum cleaner**) was responsible for
+An asynchronous process (called **vacuum cleaner**) was responsible for
 sweeping records which are no longer valid to the archive. The syntax
 to invoke this cleaner was:
 
