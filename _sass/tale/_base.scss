@@ -64,3 +64,24 @@ img {
 td {
   vertical-align: top;
 }
+
+table {
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #eee;
+}
+
+thead {
+  background-color: #333;
+  color: white;
+  font-size: 0.875rem;
+  letter-spacing: 2%;
+}
