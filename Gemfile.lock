@@ -86,8 +86,5 @@ DEPENDENCIES
   tale!
   webrick (~> 1.8)
 
-RUBY VERSION
-   ruby 3.2.1p31
-
 BUNDLED WITH
    2.4.22
