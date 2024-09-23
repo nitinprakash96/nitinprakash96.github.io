@@ -12,7 +12,7 @@ Currently I work as software engineer at [Holmusk]("https://holmusk.com") where 
 Some things I am fond of:
 - Dogs over cats any day.
 - Working out.
-- I like riding motorbikes. I prefer: Superbikes > Retro styled motorcycles > Supermoto.
+- I like riding motorbikes. I prefer: Superbikes > Adventure bikes > Retro styled motorcycles (Cafe racers) > Supermoto.
 - What I've been listening to mostly: [my playlist](https://open.spotify.com/playlist/0NXS0L3N2i5TJu1m6ZzJYh?si=deae436accff412c)
 
 Places I can be found:
