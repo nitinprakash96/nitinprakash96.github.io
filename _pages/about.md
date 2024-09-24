@@ -10,10 +10,9 @@ I’m Nitin. I live in Bangalore, India. I started out as science person having 
 Currently I work as software engineer at [Holmusk]("https://holmusk.com") where I write healthcare software in __Haskell__. My interest lies in functional programming but I’m not limited to that.
 
 Some things I am fond of:
-- Dogs over cats any day.
-- Working out.
-- I like riding motorbikes. I prefer: Superbikes > Retro styled motorcycles > Supermoto.
-- What I've been listening to mostly: [my playlist](https://open.spotify.com/playlist/0NXS0L3N2i5TJu1m6ZzJYh?si=deae436accff412c)
+- Powerlifting.
+- Riding motorcycles. Currently I own a Kawasaki Ninja 650 and a Suzuki Gixxer 250.
+- Photography ([Instagram](https://www.instagram.com/nitin_prakash96/))
 
 Places I can be found:
 - [twitter.com/nitinprakash96](https://twitter.com/nitinprakash96)
