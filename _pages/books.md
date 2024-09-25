@@ -9,7 +9,7 @@ The following is list of books that I've read so far grouped by year.
   <summary><b> 2024</b></summary>
 
   <ol>
-    <li> All the light we cannot see i - <i>Anthony Doerr</i><br /></li>
+    <li> All the light we cannot see - <i>Anthony Doerr</i><br /></li>
     <li> Psycho-cybernetics - <i>Maxwell Maltz </i><br /></li>
     <li> What is life? - <i>Erwin Schrödinger </i><br /></li>
     <li> Clear thinking - <i>Shane Parrish </i><br /></li>
@@ -28,6 +28,7 @@ The following is list of books that I've read so far grouped by year.
     <li> Hello Beautiful - <i>Ann Napolitano </i><br /></li>
     <li> Six of Crows - <i>Leigh Bardugo </i><br /></li>
     <li> Crooked Kingdom - <i>Leigh Bardugo </i><br /></li>
+    <li> Ego is the enemy - <i>Ryan Holiday</i><br /></li>
   </ol>
 
 </details>
