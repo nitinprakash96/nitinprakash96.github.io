@@ -29,6 +29,7 @@ The following is list of books that I've read so far grouped by year.
     <li> Six of Crows - <i>Leigh Bardugo </i><br /></li>
     <li> Crooked Kingdom - <i>Leigh Bardugo </i><br /></li>
     <li> Ego is the enemy - <i>Ryan Holiday</i><br /></li>
+    <li> The Science of Storytelling - <i>Will Storr</i><br /></li>
   </ol>
 
 </details>
