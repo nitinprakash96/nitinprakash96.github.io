@@ -21,8 +21,8 @@ The following is list of books that I've read so far grouped by year.
     <li> The Nature of Software Development - <i>Ron Jeffries </i><br /></li>
     <li> SQL Antipatterns: Avoiding the Pitfalls of Database Programming - <i>Bill Karwin </i><br /></li>
     <li> The Last Question - <i>Isaac Asimov </i><br /></li>
-    <li> The Hobbit - <i>J.R.R. Tolkien </i><br /></li>
-    <li> The Fellowship of the Ring - <i>J.R.R. Tolkien </i><br /></li>
+    <li> LOTR #1: The Hobbit - <i>J.R.R. Tolkien </i><br /></li>
+    <li> LOTR #2: The Fellowship of the Ring - <i>J.R.R. Tolkien </i><br /></li>
     <li> 14 Habits of Highly Productive Developers - <i>Zeno Rocha </i><br /></li>
     <li> Jupiters Travels: Four Years Around the World on a Triumph - <i>Ted Simon </i><br /></li>
     <li> Hello Beautiful - <i>Ann Napolitano </i><br /></li>
@@ -30,6 +30,7 @@ The following is list of books that I've read so far grouped by year.
     <li> Crooked Kingdom - <i>Leigh Bardugo </i><br /></li>
     <li> Ego is the enemy - <i>Ryan Holiday</i><br /></li>
     <li> The Science of Storytelling - <i>Will Storr</i><br /></li>
+    <li> LOTR #3: The Two Towers - <i>J.R.R. Tolkien</i><br /></li>
   </ol>
 
 </details>
