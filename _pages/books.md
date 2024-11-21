@@ -31,6 +31,7 @@ The following is list of books that I've read so far grouped by year.
     <li> Ego is the enemy - <i>Ryan Holiday</i><br /></li>
     <li> The Science of Storytelling - <i>Will Storr</i><br /></li>
     <li> LOTR #3: The Two Towers - <i>J.R.R. Tolkien</i><br /></li>
+    <li> The Labyrinth of the Spirits - <i>Carlos Ruiz Zafón</i><br /></li>
   </ol>
 
 </details>
