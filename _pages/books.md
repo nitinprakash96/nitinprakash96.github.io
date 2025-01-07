@@ -6,6 +6,14 @@ permalink: /books/
 The following is list of books that I've read so far grouped by year.
 
 <details>
+  <summary><b> 2025</b></summary>
+
+  <ol>
+    <li> The Ministry of Time - <i>Kaliane Bradley </i><br /></li>
+  </ol>
+</details>
+
+<details>
   <summary><b> 2024</b></summary>
 
   <ol>
