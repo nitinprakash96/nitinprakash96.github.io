@@ -10,6 +10,16 @@ The following is list of books that I've read so far grouped by year.
 
   <ol>
     <li> The Ministry of Time - <i>Kaliane Bradley </i><br /></li>
+    <li> On Writing: A memoir of the craft - <i>Stephen King </i><br /></li>
+    <li> The 5 Types of Wealth: A Transformative Guide to Design Your Dream Life - <i>Sahil Bloom </i><br /></li>
+    <li> You Have Not Yet Heard Your Favourite Song: How Streaming Changes Music - <i>Glenn McDonald </i><br /></li>
+    <li> The House of the Spirits - <i>Isabel Allende </i><br /></li>
+    <li> 500 Tips for Startup Founders & Employees - <i>Mayank Bidawatka </i><br /></li>
+    <li> The Palace of Illusions - <i>Chitra Banerjee Divakaruni </i><br /></li>
+    <li> Math for Programmers - <i>Paul Orland </i><br /></li>
+    <li> The Catcher in the Rye - <i>J.D. Salinger </i><br /></li>
+    <li> The Immortals of Meluha - <i>Amish Tripathi </i><br /></li>
+    <li> The Secret of the Nagas - <i>Amish Tripathi </i><br /></li>
   </ol>
 </details>
 

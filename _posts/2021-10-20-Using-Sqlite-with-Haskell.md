@@ -259,7 +259,7 @@ Person {pUUID = 1, pName = "Rengoku", pEmail = "rengoku@demonslayer.com", pRole 
 *SqliteSimple>
 ```
 
-This was a high level tutorial on how to use `sqlite-simple` (or any database like `postgres-simple` and `mysql-simple`) for that matter. Note that `postgres-simple` does not ship named parameters natively. [postgres-simple-named](https://github.com/Holmusk/postgresql-simple-named) would be a suitable chouce for that as it is built on top of `postgres-simple`. Anyways, we've only seen how to play with very basic data types. Let's get a bit more creative. We can play with --
+This was a high level tutorial on how to use `sqlite-simple` (or any library like `postgres-simple` and `mysql-simple`) for that matter. Note that `postgres-simple` does not ship named parameters natively. [postgres-simple-named](https://github.com/Holmusk/postgresql-simple-named) would be a suitable choice for that as it is built on top of `postgres-simple`. Anyways, we've only seen how to play with very basic data types. Let's get a bit more creative. We can play with --
 
 - timestamps
 - Joins
