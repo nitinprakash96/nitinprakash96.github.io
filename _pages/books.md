@@ -20,6 +20,7 @@ The following is list of books that I've read so far grouped by year.
     <li> The Catcher in the Rye - <i>J.D. Salinger </i><br /></li>
     <li> The Immortals of Meluha - <i>Amish Tripathi </i><br /></li>
     <li> The Secret of the Nagas - <i>Amish Tripathi </i><br /></li>
+    <li> Project Hail Mary - <i>Andy Weir </i><br /></li>
   </ol>
 </details>
 
