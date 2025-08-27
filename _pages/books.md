@@ -21,6 +21,7 @@ The following is list of books that I've read so far grouped by year.
     <li> The Immortals of Meluha - <i>Amish Tripathi </i><br /></li>
     <li> The Secret of the Nagas - <i>Amish Tripathi </i><br /></li>
     <li> Project Hail Mary - <i>Andy Weir </i><br /></li>
+    <li> Shadow of the wind - <i>Carlos Ruiz Zafón</i><br /></li>
   </ol>
 </details>
 
