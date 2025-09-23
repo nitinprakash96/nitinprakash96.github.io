@@ -11,7 +11,7 @@ The following is list of books that I've read so far grouped by year.
   <ol>
     <li> An Introduction to Statistical Learning - <i class="author">Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani </i></li>
     <li> Understanding Software dynamics - <i class="author">Richard L. Sites </i></li>
-    <li> The Well of Ascension - <i class="author">Brandon Sanderson </i></li>
+    <li> The Well of Ascension (Mistborn saga #2) - <i class="author">Brandon Sanderson </i></li>
   </ol>
 </details>
 
