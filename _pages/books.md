@@ -35,6 +35,7 @@ The following is list of books that I've read so far grouped by year.
     <li> The Well of Ascension (Mistborn saga #2) - <i class="author">Brandon Sanderson </i></li>
     <li> The Art of Spending Money: Simple Choices for a Richer Life - <i class="author">Morgan Housel </i></li>
     <li> The Hero of Ages (Mistborn saga #3) - <i class="author">Brandon Sanderson</i></li>
+    <li> The Gunslinger (The Dark Tower #1) - <i class="author">Stephen King</i></li>
   </ol>
 </details>
 
