@@ -16,6 +16,15 @@ The following is list of books that I've read so far grouped by year.
 </details>
 
 <details>
+  <summary><b> 2026</b></summary>
+
+  <ol>
+    <li> Red Rising - <i class="author">Pierce Brown</i></li>
+    <li> The Name of the Wind - <i class="author">Patrick Rothfuss</i></li>
+  </ol>
+</details>
+
+<details>
   <summary><b> 2025</b></summary>
 
   <ol>
