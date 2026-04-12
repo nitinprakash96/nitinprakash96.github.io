@@ -19,8 +19,9 @@ The following is list of books that I've read so far grouped by year.
   <summary><b> 2026</b></summary>
 
   <ol>
-    <li> Red Rising (Red Rising Saga #3) - <i class="author">Pierce Brown</i></li>
-    <li> Golden Son (Red Rising Saga #2) - <i class="author">Pierce Brown</i></li>
+    <li> Red Rising   (Red Rising Saga #1) - <i class="author">Pierce Brown</i></li>
+    <li> Golden Son   (Red Rising Saga #2) - <i class="author">Pierce Brown</i></li>
+    <li> Morning Star (Red Rising Saga #2) - <i class="author">Pierce Brown</i></li>
     <li> The Name of the Wind - <i class="author">Patrick Rothfuss</i></li>
   </ol>
 </details>
