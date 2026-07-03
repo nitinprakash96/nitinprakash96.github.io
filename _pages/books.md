@@ -12,6 +12,7 @@ The following is list of books that I've read so far grouped by year.
     <li> An Introduction to Statistical Learning - <i class="author">Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani </i></li>
     <li> Understanding Software dynamics - <i class="author">Richard L. Sites </i></li>
     <li> The Way of Kings (The Stormlight Archive #1) - <i class="author">Brandon Sanderson </i></li>
+    <li> The Shadow of What Was Lost (The Licanius Trilogy #1) - <i class="author">James Islington </i></li>
   </ol>
 </details>
 
